@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input";
 import { useMemo, useState } from "react";
 import { ChevronRight } from "lucide-react";
 import { tocData, type TocNode } from "./tocData";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 function highlight(text: string, query: string) {
   if (!query) return text;
@@ -106,6 +107,7 @@ function TopicList({
 const Index = () => {
   const [query, setQuery] = useState("");
   const [expanded, setExpanded] = useState<Set<string>>(new Set());
+  const isMobile = useIsMobile();
 
   const visible = useMemo(() => filterTree(tocData, query), [query]);
 
@@ -124,6 +126,42 @@ const Index = () => {
 
       <main className="container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto">
+          {/* Banner Image */}
+          <div className="mb-4 sm:mb-6 md:mb-8">
+            {isMobile ? (
+              // Mobile banner - existing banner.jpeg
+              <img 
+                src="/banner.jpeg" 
+                alt="Philippine National Police Banner" 
+                className="w-full h-auto max-h-[200px] sm:max-h-[250px] md:max-h-[300px] lg:max-h-[350px] object-cover rounded-lg shadow-lg"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.src = "/banner.jpg";
+                  target.onerror = () => {
+                    target.src = "/police-logo.png";
+                  };
+                }}
+              />
+            ) : (
+              // Desktop banner - new banner for web browser
+              <img 
+                src="/web_banner.jpeg" 
+                alt="Philippine National Police Banner" 
+                className="w-full h-auto max-h-[200px] sm:max-h-[250px] md:max-h-[300px] lg:max-h-[350px] object-cover rounded-lg shadow-lg"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.src = "/banner-web.jpg";
+                  target.onerror = () => {
+                    target.src = "/banner.jpeg";
+                    target.onerror = () => {
+                      target.src = "/police-logo.png";
+                    };
+                  };
+                }}
+              />
+            )}
+          </div>
+          
           <div className="bg-card rounded-lg shadow-sm p-6 mb-8">
             <div className="flex items-center justify-between gap-4 mb-4">
               <h1 className="text-2xl font-bold text-foreground">TABLE OF CONTENTS</h1>

@@ -21,7 +21,7 @@ export const Header = () => {
               </SheetTrigger>
               <SheetContent side="left" className="sm:max-w-xs">
                 <div className="mb-6 flex items-center gap-3">
-                  <img src="/police-logo.png" alt="Police Logo" className="h-8 w-8" />
+                  <img src="/banner.png" alt="Police Logo" className="h-8 w-8" />
                   <h2 className="text-lg font-semibold">Police Operations Procedure</h2>
                 </div>
                 <nav className="space-y-1">
