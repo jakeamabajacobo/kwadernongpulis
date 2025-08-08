@@ -4,20 +4,32 @@ import { Link } from "react-router-dom";
 
 interface CategoryCardProps {
   title: string;
-  bookCount: number;
+  pageNumber?: number;
   href: string;
+  isSubItem?: boolean;
+  level?: number;
 }
 
-export const CategoryCard = ({ title, bookCount, href }: CategoryCardProps) => {
+export const CategoryCard = ({ title, pageNumber, href, isSubItem = false, level = 1 }: CategoryCardProps) => {
+  const getIndentation = () => {
+    if (!isSubItem) return "";
+    if (level === 2) return "ml-8";
+    return "ml-4";
+  };
+
   return (
     <Link to={href} className="block">
-      <Card className="hover:shadow-md transition-all duration-200 hover:bg-primary-soft border-border">
-        <CardContent className="flex items-center justify-between p-4">
+      <Card className={`hover:shadow-md transition-all duration-200 hover:bg-primary-soft border-border ${getIndentation()}`}>
+        <CardContent className="flex items-center justify-between p-3">
           <div className="flex-1">
-            <h3 className="font-medium text-foreground">{title}</h3>
+            <h3 className={`${isSubItem ? 'text-sm text-muted-foreground' : 'font-medium text-foreground'}`}>
+              {title}
+            </h3>
           </div>
           <div className="flex items-center gap-3 text-muted-foreground">
-            <span className="text-sm font-medium">{bookCount} Books</span>
+            {pageNumber && (
+              <span className="text-sm font-mono">{pageNumber}</span>
+            )}
             <ChevronRight className="h-4 w-4" />
           </div>
         </CardContent>

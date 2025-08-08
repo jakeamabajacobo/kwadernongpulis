@@ -2,43 +2,103 @@ import { useParams } from "react-router-dom";
 import { Header } from "@/components/Header";
 import { ChapterContent } from "@/components/ChapterContent";
 
-// Sample content data
-const categoryContent: Record<string, any> = {
-  "action-adventure": {
-    author: "Angie Diane Hart",
-    chapter: "Chapter 1",
-    title: "Why we struggle?",
+// Police Operations Procedure content data
+const policeContent: Record<string, any> = {
+  "general-principles": {
+    chapter: "GENERAL PRINCIPLES",
+    title: "Overview of Police Operations Framework",
     content: [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo."
+      "The Police Operations Procedure provides a comprehensive framework for law enforcement activities and establishes the standard operating procedures for police personnel.",
+      "These principles ensure consistency, accountability, and effectiveness in police operations while maintaining public trust and safety.",
+      "All police operations must be conducted within the bounds of law, with respect for human rights, and in accordance with established procedures."
     ]
   },
-  "adventure": {
-    author: "Marcus Thompson",
-    chapter: "Chapter 1", 
-    title: "The Journey Begins",
+  "strategic-guidelines": {
+    chapter: "Strategic Guidelines", 
+    title: "Core Strategic Framework",
     content: [
-      "In the heart of the Amazon rainforest, where ancient trees whisper secrets of centuries past, our expedition began with the promise of discovery.",
-      "The morning mist clung to the canopy like a veil, revealing glimpses of the verdant world that awaited us. Each step forward was a step into the unknown.",
-      "As we navigated through the dense undergrowth, the sounds of the jungle created a symphony that had remained unchanged for millennia."
+      "Strategic guidelines form the foundation of effective police operations and provide direction for tactical implementation.",
+      "These guidelines ensure coordinated responses, optimal resource allocation, and adherence to constitutional principles.",
+      "Strategic planning must incorporate community needs, operational requirements, and legal constraints to achieve maximum effectiveness."
     ]
   },
-  "african-american-fiction": {
-    author: "Zora Williams",
+  "general-guidelines-chapter": {
     chapter: "Chapter 1",
-    title: "Roots and Branches", 
+    title: "General Guidelines",
     content: [
-      "The old oak tree in grandmother's backyard held more than leaves and bark; it held our family's stories, passed down through generations.",
-      "Every summer, we would gather beneath its sprawling branches, listening to tales of resilience, love, and triumph that shaped who we were.",
-      "These stories weren't just entertainment—they were our heritage, our strength, and our connection to something greater than ourselves."
+      "Chapter 1 establishes the fundamental guidelines for police operations, covering uniform requirements, equipment standards, and operational categories.",
+      "This chapter provides the baseline standards that all police personnel must follow in their daily duties and operations.",
+      "Compliance with these guidelines ensures professionalism, safety, and effectiveness in all police activities."
+    ]
+  },
+  "police-uniform": {
+    chapter: "Section 1-1",
+    title: "Police Uniform and Accessories",
+    content: [
+      "Police uniforms serve as a symbol of authority and must be worn with pride and dignity at all times during official duties.",
+      "Proper uniform standards ensure public recognition, professional appearance, and officer safety through appropriate protective gear.",
+      "All uniform components must meet prescribed specifications and be maintained in good condition to reflect the professionalism of the police force."
+    ]
+  },
+  "agency-uniform": {
+    chapter: "1.1",
+    title: "Agency Prescribed Uniform",
+    content: [
+      "The agency prescribed uniform is the standard dress code that must be worn by all police personnel during official duties.",
+      "Uniform specifications include specific colors, materials, insignia placement, and accessory requirements as defined by departmental policy.",
+      "Proper wearing of the prescribed uniform demonstrates respect for the institution and helps maintain public confidence in law enforcement."
+    ]
+  },
+  "appearing-public": {
+    chapter: "1.2", 
+    title: "Appearing Before the Public",
+    content: [
+      "Police officers must maintain a professional appearance when appearing before the public, whether in uniform or civilian clothes.",
+      "Public appearance standards include proper grooming, neat attire, and courteous behavior that reflects positively on the police force.",
+      "Officers represent the entire law enforcement community and must conduct themselves accordingly in all public interactions."
+    ]
+  },
+  "basic-equipment": {
+    chapter: "1.3",
+    title: "Carrying of Basic Police Equipment", 
+    content: [
+      "All police officers must carry prescribed basic equipment necessary for the performance of their duties and personal protection.",
+      "Basic equipment includes service weapons, handcuffs, radio communication devices, identification, and other items as specified by policy.",
+      "Proper maintenance and inspection of equipment ensures operational readiness and officer safety during field operations."
+    ]
+  },
+  "police-operations": {
+    chapter: "Section 1-2",
+    title: "Categories of Police Operations",
+    content: [
+      "Police operations are categorized into distinct types based on their purpose, scope, and required resources.",
+      "Understanding these categories helps ensure appropriate planning, resource allocation, and execution of law enforcement activities.",
+      "Each category has specific procedures, requirements, and protocols that must be followed for effective implementation."
+    ]
+  },
+  "patrol-operations": {
+    chapter: "1.4",
+    title: "Patrol Operations",
+    content: [
+      "Patrol operations form the backbone of community policing and crime prevention efforts.",
+      "These operations involve regular monitoring of assigned areas, responding to calls for service, and maintaining visible police presence.",
+      "Effective patrol operations require strategic deployment, proper equipment, and continuous communication with command centers."
+    ]
+  },
+  "law-enforcement": {
+    chapter: "1.5", 
+    title: "Law Enforcement Operations",
+    content: [
+      "Law enforcement operations encompass activities directed at detecting, investigating, and prosecuting criminal activities.",
+      "These operations require specialized training, proper legal procedures, and coordination with judicial authorities.",
+      "Success in law enforcement operations depends on thorough preparation, evidence collection, and adherence to constitutional rights."
     ]
   }
 };
 
 export const CategoryPage = () => {
   const { category } = useParams<{ category: string }>();
-  const content = category ? categoryContent[category] : null;
+  const content = category ? policeContent[category] : null;
 
   if (!content) {
     return (

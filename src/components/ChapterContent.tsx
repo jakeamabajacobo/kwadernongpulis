@@ -17,7 +17,7 @@ export const ChapterContent = ({ author, chapter, title, content }: ChapterConte
           <Link to="/">
             <Button variant="ghost" className="mb-4 pl-0">
               <ArrowLeft className="h-4 w-4 mr-2" />
-              Back to Library
+              Back to Table of Contents
             </Button>
           </Link>
         </div>
