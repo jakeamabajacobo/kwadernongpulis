@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from "react";
-import { ChevronRight, ChevronDown, Search, Folder, FolderOpen, FileText } from "lucide-react";
+import { ChevronRight, ChevronDown, Search, Folder, FolderOpen, FileText, Download } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import {
   Table,
@@ -121,6 +121,16 @@ export const TocTable: React.FC<TocTableProps> = ({ data }) => {
     );
   };
   
+  const handleDownload = () => {
+    const link = document.createElement('a');
+    link.href = '/POP-Manual-2021.pdf';
+    link.download = 'POP-Manual-2021.pdf';
+    link.target = '_blank';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+  
   return (
     <div className="space-y-6">
       {/* Search Bar */}
@@ -212,34 +222,46 @@ export const TocTable: React.FC<TocTableProps> = ({ data }) => {
         </Table>
       </div>
       
-      {/* Expand/Collapse All Buttons */}
-      <div className="flex gap-2 justify-end">
-        <button
-          onClick={() => {
-            const allKeys = new Set<string>();
-            const collectKeys = (nodes: TocNode[], depth = 0) => {
-              nodes.forEach((node, index) => {
-                const key = `${depth}-${index}-${node.title}`;
-                if (hasChildren(node)) {
-                  allKeys.add(key);
-                  if (node.children) {
-                    collectKeys(node.children, depth + 1);
+      {/* Action Buttons */}
+      <div className="flex gap-4 justify-between items-center">
+        {/* Expand/Collapse All Buttons */}
+        <div className="flex gap-2">
+          <button
+            onClick={() => {
+              const allKeys = new Set<string>();
+              const collectKeys = (nodes: TocNode[], depth = 0) => {
+                nodes.forEach((node, index) => {
+                  const key = `${depth}-${index}-${node.title}`;
+                  if (hasChildren(node)) {
+                    allKeys.add(key);
+                    if (node.children) {
+                      collectKeys(node.children, depth + 1);
+                    }
                   }
-                }
-              });
-            };
-            collectKeys(visible);
-            setExpanded(allKeys);
-          }}
-          className="px-4 py-2 text-sm font-medium text-primary bg-primary/10 hover:bg-primary/20 rounded-md transition-colors duration-200"
-        >
-          Expand All
-        </button>
+                });
+              };
+              collectKeys(visible);
+              setExpanded(allKeys);
+            }}
+            className="px-4 py-2 text-sm font-medium text-primary bg-primary/10 hover:bg-primary/20 rounded-md transition-colors duration-200"
+          >
+            Expand All
+          </button>
+          <button
+            onClick={() => setExpanded(new Set())}
+            className="px-4 py-2 text-sm font-medium text-muted-foreground bg-muted hover:bg-muted/80 rounded-md transition-colors duration-200"
+          >
+            Collapse All
+          </button>
+        </div>
+        
+        {/* Download Button */}
         <button
-          onClick={() => setExpanded(new Set())}
-          className="px-4 py-2 text-sm font-medium text-muted-foreground bg-muted hover:bg-muted/80 rounded-md transition-colors duration-200"
+          onClick={handleDownload}
+          className="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium text-white bg-primary hover:bg-primary/90 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105"
         >
-          Collapse All
+          <Download className="h-4 w-4" />
+          Download POP Book
         </button>
       </div>
     </div>
