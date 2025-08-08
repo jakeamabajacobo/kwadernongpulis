@@ -10,6 +10,7 @@ export const Header = () => {
             <Button variant="ghost" size="icon" className="text-primary-foreground hover:bg-primary-foreground/10">
               <Menu className="h-5 w-5" />
             </Button>
+            <img src="/police-logo.svg" alt="Police Logo" className="h-8 w-8" />
             <h1 className="text-lg font-semibold">Police Operations Procedure</h1>
           </div>
           <Button variant="ghost" size="icon" className="text-primary-foreground hover:bg-primary-foreground/10">
