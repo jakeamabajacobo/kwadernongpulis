@@ -1,53 +1,142 @@
 import { Header } from "@/components/Header";
-import { CategoryCard } from "@/components/CategoryCard";
+import { Input } from "@/components/ui/input";
+import { useMemo, useState } from "react";
+import { ChevronRight } from "lucide-react";
+import { tocData, type TocNode } from "./tocData";
 
-const tableOfContents = [
-  { title: "GENERAL PRINCIPLES", pageNumber: 1, href: "/chapter/general-principles" },
-  { title: "Strategic Guidelines", pageNumber: 1, href: "/chapter/strategic-guidelines", isSubItem: true },
-  { title: "CHAPTER 1 GENERAL GUIDELINES", pageNumber: 2, href: "/chapter/general-guidelines-chapter" },
-  { title: "Section 1-1 Police Uniform and Accessories", pageNumber: 2, href: "/chapter/police-uniform", isSubItem: true },
-  { title: "1.1 Agency Prescribed Uniform", pageNumber: 2, href: "/chapter/agency-uniform", isSubItem: true, level: 2 },
-  { title: "1.2 Appearing Before the Public", pageNumber: 2, href: "/chapter/appearing-public", isSubItem: true, level: 2 },
-  { title: "1.3 Carrying of Basic Police Equipment", pageNumber: 2, href: "/chapter/basic-equipment", isSubItem: true, level: 2 },
-  { title: "Section 1-2 Categories of Police Operations", pageNumber: 2, href: "/chapter/police-operations", isSubItem: true },
-  { title: "1.4 Patrol Operations", pageNumber: 2, href: "/chapter/patrol-operations", isSubItem: true, level: 2 },
-  { title: "1.5 Law Enforcement Operations", pageNumber: 2, href: "/chapter/law-enforcement", isSubItem: true, level: 2 },
-  { title: "1.6 Internal Security Operations", pageNumber: 3, href: "/chapter/internal-security", isSubItem: true, level: 2 },
-  { title: "1.7 Public Safety Operations", pageNumber: 3, href: "/chapter/public-safety", isSubItem: true, level: 2 },
-  { title: "1.8 Special Police Operations", pageNumber: 3, href: "/chapter/special-operations", isSubItem: true, level: 2 },
-  { title: "1.9 Investigation Operations", pageNumber: 3, href: "/chapter/investigation", isSubItem: true, level: 2 },
-  { title: "1.10 Police Community Relations", pageNumber: 3, href: "/chapter/community-relations", isSubItem: true, level: 2 },
-  { title: "CHAPTER 2 OPERATIONAL GUIDELINES", pageNumber: 4, href: "/chapter/operational-guidelines" },
-  { title: "Section 2-1 Pre-Operational Clearance", pageNumber: 4, href: "/chapter/pre-operational", isSubItem: true },
-  { title: "Section 2-2 Coordination", pageNumber: 4, href: "/chapter/coordination", isSubItem: true },
-  { title: "2.1 Inter-Office Coordination", pageNumber: 4, href: "/chapter/inter-office", isSubItem: true, level: 2 },
-  { title: "2.2 Coordination by Filing Coordination Form", pageNumber: 4, href: "/chapter/filing-form", isSubItem: true, level: 2 },
-  { title: "2.3 Coordination by Practical/Available Means of Communication", pageNumber: 5, href: "/chapter/communication", isSubItem: true, level: 2 },
-];
+function highlight(text: string, query: string) {
+  if (!query) return text;
+  const idx = text.toLowerCase().indexOf(query.toLowerCase());
+  if (idx === -1) return text;
+  const before = text.slice(0, idx);
+  const match = text.slice(idx, idx + query.length);
+  const after = text.slice(idx + query.length);
+  return (
+    <>
+      {before}
+      <mark className="bg-yellow-200 text-foreground rounded px-0.5">{match}</mark>
+      {after}
+    </>
+  );
+}
+
+function filterTree(nodes: TocNode[], query: string): TocNode[] {
+  if (!query) return nodes;
+  const q = query.toLowerCase();
+  const walk = (node: TocNode): TocNode | null => {
+    const selfMatch = node.title.toLowerCase().includes(q);
+    const filteredChildren = (node.children || [])
+      .map(walk)
+      .filter(Boolean) as TocNode[];
+    if (selfMatch || filteredChildren.length) {
+      return { ...node, children: filteredChildren };
+    }
+    return null;
+  };
+  return nodes.map(walk).filter(Boolean) as TocNode[];
+}
+
+function TopicList({
+  nodes,
+  expanded,
+  toggle,
+  depth = 0,
+  query,
+}: {
+  nodes: TocNode[];
+  expanded: Set<string>;
+  toggle: (key: string) => void;
+  depth?: number;
+  query: string;
+}) {
+  return (
+    <ul className="space-y-1">
+      {nodes.map((node, i) => {
+        const key = `${depth}-${i}-${node.title}`;
+        const hasChildren = !!node.children && node.children.length > 0;
+        const autoExpand = query.length > 0;
+        const isOpen = autoExpand || expanded.has(key);
+        return (
+          <li key={key}>
+            <div
+              className={`flex items-center justify-between rounded-md px-3 py-2 ${
+                hasChildren ? "cursor-pointer hover:bg-accent hover:text-accent-foreground" : ""
+              } ${node.href ? "cursor-pointer hover:bg-accent hover:text-accent-foreground" : ""}`}
+              style={{ paddingLeft: `${12 + depth * 16}px` }}
+              onClick={() => {
+                if (hasChildren) {
+                  toggle(key);
+                } else if (node.href) {
+                  window.location.href = node.href;
+                }
+              }}
+            >
+              <div className="flex items-center gap-2">
+                {hasChildren && (
+                  <ChevronRight
+                    className={`h-4 w-4 text-red-600 transition-transform ${isOpen ? "rotate-90" : ""}`}
+                  />
+                )}
+                <span className="text-sm">
+                  {highlight(node.title, query)}
+                </span>
+              </div>
+              {node.page !== undefined && (
+                <span className="text-xs text-muted-foreground font-mono">{node.page}</span>
+              )}
+            </div>
+            {hasChildren && isOpen && (
+              <div className="mt-1">
+                <TopicList
+                  nodes={node.children!}
+                  expanded={expanded}
+                  toggle={toggle}
+                  depth={depth + 1}
+                  query={query}
+                />
+              </div>
+            )}
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
 
 const Index = () => {
+  const [query, setQuery] = useState("");
+  const [expanded, setExpanded] = useState<Set<string>>(new Set());
+
+  const visible = useMemo(() => filterTree(tocData, query), [query]);
+
+  const toggle = (key: string) => {
+    setExpanded((prev) => {
+      const next = new Set(prev);
+      if (next.has(key)) next.delete(key);
+      else next.add(key);
+      return next;
+    });
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      
+
       <main className="container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto">
-          <div className="bg-card rounded-lg shadow-sm p-8 mb-8">
-            <h1 className="text-3xl font-bold text-center mb-8 text-primary">
-              TABLE OF CONTENTS
-            </h1>
-            <div className="space-y-2">
-              {tableOfContents.map((item, index) => (
-                <CategoryCard
-                  key={index}
-                  title={item.title}
-                  pageNumber={item.pageNumber}
-                  href={item.href}
-                  isSubItem={item.isSubItem}
-                  level={item.level}
+          <div className="bg-card rounded-lg shadow-sm p-6 mb-8">
+            <div className="flex items-center justify-between gap-4 mb-4">
+              <h1 className="text-2xl font-bold text-foreground">TABLE OF CONTENTS</h1>
+              <div className="w-72 max-w-full">
+                <Input
+                  placeholder="Search topics..."
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
                 />
-              ))}
+              </div>
             </div>
+
+            <TopicList nodes={visible} expanded={expanded} toggle={toggle} query={query} />
           </div>
         </div>
       </main>
