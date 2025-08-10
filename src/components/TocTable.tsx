@@ -310,7 +310,7 @@ export const TocTable: React.FC<TocTableProps> = ({ data }) => {
               {node.title === "CHAPTER 1 GENERAL GUIDELINES" && (
                 <div className="mt-2 p-3 bg-muted/30 rounded-lg border-l-4 border-primary/50">
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    Chapter 1 establishes the fundamental guidelines for police operations, covering uniform requirements, equipment standards, and operational categories. This chapter provides the baseline standards that all police personnel must follow in their daily duties and operations. Compliance with these guidelines ensures professionalism, safety, and effectiveness in all police activities.
+                    Chapter 1
                   </p>
                 </div>
               )}
