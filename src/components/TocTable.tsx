@@ -254,8 +254,8 @@ export const TocTable: React.FC<TocTableProps> = ({ data }) => {
       return;
     }
     
-    // Don't navigate for sections 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, and 2.7 since content is displayed directly
-    if (["2.1 Inter-Office Coordination", "2.2 Coordination by Filing Coordination Form", "2.3 Coordination by Practical/Available Means of Communication", "2.4 Basic Requirements", "2.5 Use of Megaphones and Similar Instruments/devices", "2.6 Accessories", "2.7 Use of Body Worn Camera"].includes(node.title)) {
+    // Don't navigate for sections 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, and 2.9 since content is displayed directly
+    if (["2.1 Inter-Office Coordination", "2.2 Coordination by Filing Coordination Form", "2.3 Coordination by Practical/Available Means of Communication", "2.4 Basic Requirements", "2.5 Use of Megaphones and Similar Instruments/devices", "2.6 Accessories", "2.7 Use of Body Worn Camera", "2.8 Application of Necessary and Reasonable Force", "2.9 The Force Continuum"].includes(node.title)) {
       console.log(`Row click on "${node.title}" - content displayed directly, not navigating.`);
       return;
     }
@@ -309,7 +309,7 @@ export const TocTable: React.FC<TocTableProps> = ({ data }) => {
                 key={key}
                 className={`
               transition-all duration-300 hover:shadow-lg hover:scale-[1.02]
-              ${hasChildren(node) && !["CHAPTER 1 GENERAL GUIDELINES", "1.1 Agency Prescribed Uniform", "1.2 Appearing Before the Public", "1.3 Carrying of Basic Police Equipment", "1.4 Patrol Operations", "1.5 Law Enforcement Operations", "1.6 Internal Security Operations", "1.7 Public Safety Operations", "1.8 Special Police Operations", "1.9 Investigation Operations", "1.10 Police Community Relations", "2.1 Inter-Office Coordination", "2.2 Coordination by Filing Coordination Form", "2.3 Coordination by Practical/Available Means of Communication", "2.4 Basic Requirements", "2.5 Use of Megaphones and Similar Instruments/devices", "2.6 Accessories", "2.7 Use of Body Worn Camera", "Section 1-1 Police Uniform and Accessories", "Section 1-2 Categories of Police Operations"].includes(node.title) && href && href !== '' ? 'cursor-pointer hover:bg-accent/30' : ''}
+              ${hasChildren(node) && !["CHAPTER 1 GENERAL GUIDELINES", "1.1 Agency Prescribed Uniform", "1.2 Appearing Before the Public", "1.3 Carrying of Basic Police Equipment", "1.4 Patrol Operations", "1.5 Law Enforcement Operations", "1.6 Internal Security Operations", "1.7 Public Safety Operations", "1.8 Special Police Operations", "1.9 Investigation Operations", "1.10 Police Community Relations", "2.1 Inter-Office Coordination", "2.2 Coordination by Filing Coordination Form", "2.3 Coordination by Practical/Available Means of Communication", "2.4 Basic Requirements", "2.5 Use of Megaphones and Similar Instruments/devices", "2.6 Accessories", "2.7 Use of Body Worn Camera", "2.8 Application of Necessary and Reasonable Force", "2.9 The Force Continuum", "Section 1-1 Police Uniform and Accessories", "Section 1-2 Categories of Police Operations"].includes(node.title) && href && href !== '' ? 'cursor-pointer hover:bg-accent/30' : ''}
               ${depth === 0 ? 'border-l-4 border-l-primary bg-gradient-to-r from-primary/5 to-transparent shadow-md' : ''}
               ${depth === 1 ? 'border-l-4 border-l-secondary bg-gradient-to-r from-secondary/5 to-transparent shadow-sm' : ''}
               ${depth >= 2 ? 'border-l-2 border-l-muted bg-gradient-to-r from-muted/5 to-transparent' : ''}
@@ -678,6 +678,170 @@ export const TocTable: React.FC<TocTableProps> = ({ data }) => {
                       <li>While on the grounds of any public, private or parochial elementary or secondary school, hospitals, churches and other places of worship except when responding to an imminent threat to life or health; and</li>
                       <li>Other circumstances as may be provided by the trial court issuing the warrant which is part of constitutional privilege and where the dignity of an individual may outweigh the public necessity for recording.</li>
                     </ol>
+                  </div>
+                </div>
+              )}
+              
+              {node.title === "2.8 Application of Necessary and Reasonable Force" && (
+                <div className="mt-2 p-4 bg-gradient-to-r from-primary/5 to-primary/10 rounded-lg border border-primary/20">
+                  <div className="flex items-center gap-2 mb-2">
+                    <FileTextIcon className="h-4 w-4 text-primary" />
+                    <span className="text-sm font-medium text-primary">Topic Content</span>
+                  </div>
+                  <div className="text-sm text-muted-foreground leading-relaxed space-y-3">
+                    <p>
+                      <strong>a. Use of Force:</strong> The use of force by police officers is authorized only when necessary and reasonable to accomplish a lawful objective. The degree of force used must be proportional to the threat or resistance encountered.
+                    </p>
+                    <p>
+                      <strong>b. Necessity:</strong> Force may only be used when there is no reasonable alternative available to accomplish the lawful objective. Officers must consider whether the use of force is necessary under the circumstances.
+                    </p>
+                    <p>
+                      <strong>c. Reasonableness:</strong> The amount and type of force used must be reasonable under the circumstances. Officers must consider factors such as:
+                    </p>
+                    <ul className="list-disc list-inside ml-4 space-y-1">
+                      <li>The severity of the crime or threat</li>
+                      <li>Whether the suspect poses an immediate threat to the safety of officers or others</li>
+                      <li>Whether the suspect is actively resisting arrest or attempting to evade arrest by flight</li>
+                      <li>The availability of alternative methods to accomplish the objective</li>
+                    </ul>
+                    <p>
+                      <strong>d. De-escalation:</strong> Officers must attempt to de-escalate situations when possible and reasonable to do so, using communication and other non-force methods to resolve conflicts.
+                    </p>
+                  </div>
+                </div>
+              )}
+              
+              {node.title === "2.9 The Force Continuum" && (
+                <div className="mt-2 p-4 bg-gradient-to-r from-primary/5 to-primary/10 rounded-lg border border-primary/20">
+                  <div className="flex items-center gap-2 mb-2">
+                    <FileTextIcon className="h-4 w-4 text-primary" />
+                    <span className="text-sm font-medium text-primary">Topic Content</span>
+                  </div>
+                  <div className="text-sm text-muted-foreground leading-relaxed space-y-3">
+                    <p>
+                      <strong>The Force Continuum:</strong> Police officers must follow the force continuum, which provides a framework for determining the appropriate level of force to use in any given situation. The continuum includes:
+                    </p>
+                    <ol className="list-decimal list-inside ml-4 space-y-2">
+                      <li>
+                        <strong>Officer Presence:</strong> The mere presence of a police officer in uniform is often sufficient to gain compliance.
+                      </li>
+                      <li>
+                        <strong>Verbal Commands:</strong> Clear, calm, and professional verbal commands should be used to direct individuals.
+                      </li>
+                      <li>
+                        <strong>Soft Empty Hand Control:</strong> Techniques such as escort holds, wrist locks, and pressure point applications.
+                      </li>
+                      <li>
+                        <strong>Hard Empty Hand Control:</strong> Strikes, kicks, and other defensive tactics when necessary.
+                      </li>
+                      <li>
+                        <strong>Intermediate Weapons:</strong> Use of batons, pepper spray, or other less-lethal weapons.
+                      </li>
+                      <li>
+                        <strong>Lethal Force:</strong> Use of firearms only when there is an immediate threat of death or serious bodily injury.
+                      </li>
+                    </ol>
+                    <p>
+                      <strong>Progressive Response:</strong> Officers should progress through the continuum based on the subject's behavior and the circumstances. Officers may skip levels if the situation escalates rapidly.
+                    </p>
+                    <p>
+                      <strong>Documentation:</strong> All uses of force must be documented in detail, including the circumstances, the level of force used, and the justification for its use.
+                    </p>
+                    
+                    <div className="mt-6 pt-4 border-t border-primary/20">
+                      <h4 className="text-base font-semibold text-primary mb-3">a. Three Approaches on The Use of Force Continuum</h4>
+                      
+                      <div className="space-y-4">
+                        <div>
+                          <h5 className="text-sm font-semibold text-muted-foreground mb-2">1) Non-Lethal Approach</h5>
+                          <p className="text-sm text-muted-foreground mb-3">
+                            This involves the police presence in crime-prone areas and the employment of activities or actions to persuade and/or request cooperation of people particularly suspects and law offenders to police instructions and other control efforts.
+                          </p>
+                          
+                          <div className="bg-muted/30 rounded-lg p-3 mb-3">
+                            <h6 className="text-xs font-semibold text-primary mb-2">Table 1.1 Non-Lethal Approach</h6>
+                            
+                            <div className="space-y-3 text-xs">
+                              <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+                                <div className="font-medium text-primary">Officer's Presence</div>
+                                <div className="font-medium text-primary">Suspect Threats or Resistance: Cooperative</div>
+                                <div className="font-medium text-primary">Police Response/Equipment</div>
+                              </div>
+                              
+                              <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+                                <div className="text-muted-foreground">• Compliant and cooperative with police control efforts.</div>
+                                <div className="text-muted-foreground">• Display professional and respectable deportment.</div>
+                                <div className="text-muted-foreground">• Wear the prescribed uniform with the equipment securely attached to the rig or utility belt.</div>
+                              </div>
+                            </div>
+                          </div>
+                          
+                          <div className="bg-muted/30 rounded-lg p-3 mb-3">
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+                              <div className="font-medium text-primary">Verbal Command</div>
+                              <div className="font-medium text-primary">Suspect Threats or Resistance: Non-Verbal and Verbal Non-Compliance</div>
+                              <div className="font-medium text-primary">Police Response/Equipment</div>
+                            </div>
+                            
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-2 mt-2">
+                              <div className="text-muted-foreground">• Non-compliant, uncooperative or resist to follow police control efforts.</div>
+                              <div className="text-muted-foreground">• Do not present immediate physical resistance or threats of physical injury to the police or to other persons.</div>
+                              <div className="text-muted-foreground">
+                                • Employ communication techniques, including: request, persuasion, command and/or issuance of warning by voice, print and/or electronic in clear and understandable manner.<br/>
+                                • Use of whistle<br/>
+                                • Use of language that is known to the offender or in the national language<br/>
+                                • The verbal command shall be done in a loud, firm and clear manner.<br/>
+                                • Use of sign language for speech-impaired offenders
+                              </div>
+                            </div>
+                          </div>
+                          
+                          <div className="bg-muted/30 rounded-lg p-3 mb-3">
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+                              <div className="font-medium text-primary">Physical Control-Soft Hand Technique</div>
+                              <div className="font-medium text-primary">Suspect Threats or Resistance: Passive Resistance</div>
+                              <div className="font-medium text-primary">Police Response/Equipment</div>
+                            </div>
+                            
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-2 mt-2">
+                              <div className="text-muted-foreground">• Unarmed</div>
+                              <div className="text-muted-foreground">• Non-compliant, uncooperative and verbally abusive.</div>
+                              <div className="text-muted-foreground">
+                                • Ensure the employment of reasonable force that will cause no harm or minimal chance of injury to the suspect or law offender.<br/>
+                                • Includes but not limited to:<br/>
+                                &nbsp;&nbsp;o Use of bare hands to guide, escort, hold and/or apply restraining equipment (handcuffs or flex cuffs/plastic strap).<br/>
+                                &nbsp;&nbsp;o Application of body joint manipulation, immobilization and/or touch pressure point stimulation to ensure cooperation, compliance or surrender.
+                              </div>
+                            </div>
+                          </div>
+                          
+                          <div className="bg-muted/30 rounded-lg p-3 mb-3">
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+                              <div className="font-medium text-primary">Physical Control-Hard Hand Technique</div>
+                              <div className="font-medium text-primary">Suspect Threats or Resistance: Active Resistance</div>
+                              <div className="font-medium text-primary">Police Response/Equipment</div>
+                            </div>
+                            
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-2 mt-2">
+                              <div className="text-muted-foreground">• Unarmed.</div>
+                              <div className="text-muted-foreground">• Non-compliant, uncooperative and verbally abusive.</div>
+                              <div className="text-muted-foreground">
+                                • As much as possible, the employment of reasonable force will not result to serious injury.<br/>
+                                • Employ reasonable physical control and/or pain-compliant techniques, such as: punches, kicks and other striking techniques to ensure cooperation, compliance or surrender.<br/>
+                                • May orally summon as many persons as he/she deems necessary to assist him/her in effecting the arrest.
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div>
+                          <h5 className="text-sm font-semibold text-muted-foreground mb-2">2) Less Lethal Approach</h5>
+                          <p className="text-sm text-muted-foreground">
+                            This involves the employment of less lethal equipment that do not cause serious injury and/or death and that less physical measures have been tried and deemed inappropriate purposely to ensure cooperation, compliance or surrender. The age, gender and health condition of offenders shall be considered before the employment of less lethal equipment.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               )}
