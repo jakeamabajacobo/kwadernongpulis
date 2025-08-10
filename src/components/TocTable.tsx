@@ -127,26 +127,9 @@ interface TocTableProps {
 }
 
 export const TocTable: React.FC<TocTableProps> = ({ data }) => {
-  // Initialize with Section 2-1 Pre-Operational Clearance always expanded
   const [expanded, setExpanded] = useState<Set<string>>(new Set());
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
-  
-  // Ensure Section 2-1 Pre-Operational Clearance is always expanded
-  React.useEffect(() => {
-    const findAndExpandSection = (nodes: TocNode[], depth = 0) => {
-      nodes.forEach((node, index) => {
-        if (node.title === "Section 2-1 Pre-Operational Clearance") {
-          const key = `${depth}-${index}-${node.title}`;
-          setExpanded(prev => new Set([...prev, key]));
-        }
-        if (node.children) {
-          findAndExpandSection(node.children, depth + 1);
-        }
-      });
-    };
-    findAndExpandSection(data);
-  }, [data]);
   
   const visible = useMemo(() => filterTree(data, query), [data, query]);
   const flattenedData = useMemo(() => flattenTocData(visible, 0, expanded), [visible, expanded]);
