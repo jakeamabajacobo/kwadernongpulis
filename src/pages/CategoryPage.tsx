@@ -93,6 +93,67 @@ const policeContent: Record<string, any> = {
       "These operations require specialized training, proper legal procedures, and coordination with judicial authorities.",
       "Success in law enforcement operations depends on thorough preparation, evidence collection, and adherence to constitutional rights."
     ]
+  },
+  
+  // Section 2-5 Use of Firearm During Police Operations
+  "use-of-firearm-during-police-operations": {
+    chapter: "Section 2-5",
+    title: "Use of Firearm During Police Operations",
+    content: [
+      "This section establishes the comprehensive guidelines and procedures for the use of firearms during police operations.",
+      "It covers when firearms may be used, restrictions on their use, and required procedures after firearm use.",
+      "The section addresses critical aspects including justification requirements, prohibitions on firing at moving vehicles, mandatory incident reporting, and post-confrontation protocols.",
+      "All personnel must be thoroughly trained in these guidelines and strictly adhere to established protocols.",
+      "Firearm use is strictly regulated and may only be used when justified under specific circumstances with proper documentation and reporting required for all discharges."
+    ]
+  },
+  "use-of-firearm-when-justified": {
+    chapter: "2.11",
+    title: "Use of Firearm When Justified",
+    content: [
+      "The use of firearm is justified if the offender poses an imminent danger of causing death or injury to the police officer or other persons.",
+      "The use of firearm is also justified under the doctrines of self-defense, defense of a relative, and defense of a stranger.",
+      "However, one who resorts to self-defense must face a real threat on his/her life, and the peril sought to be avoided must be actual, imminent and real.",
+      "Unlawful aggression should be present for self-defense to be considered as a justifying circumstance.",
+      "The police shall not use warning shots during police operation except when the police officer is outnumbered and overpowered, and his/her life and limb is in imminent danger."
+    ]
+  },
+  "firing-at-moving-vehicles-is-prohibited": {
+    chapter: "2.12",
+    title: "Firing at Moving Vehicles is Prohibited",
+    content: [
+      "A moving vehicle and its occupants shall not be fired upon except when its occupants pose imminent danger of causing death or injury to the police officer or any other person, and that the use of firearm does not create any danger to the public and outweighs the likely benefits of its non-use.",
+      "In firing at a moving vehicle, the following parameters should be considered:",
+      "a. The intent of the suspect/s to harm the police officer or other persons;",
+      "b. The capability of the suspect/s to harm with certainty the police officer or other persons; and",
+      "c. Accessibility or the proximity of the suspect/s from the police officer and other persons."
+    ]
+  },
+  "filing-of-an-incident-report-after-the-use-of-firearm": {
+    chapter: "2.13",
+    title: "Filing of an Incident Report After the Use of Firearm",
+    content: [
+      "A police officer who fires his/her service firearm or weapon during a confrontation with an offender or offenders must submit an incident report outlining the circumstances necessitating the use of his/her firearm.",
+      "This requirement ensures proper documentation for legal purposes and provides accountability for all firearm discharges.",
+      "The report must outline the circumstances that necessitated firearm use and be filed with the appropriate authority.",
+      "All details must be accurately documented to allow for proper review and investigation.",
+      "Proper documentation maintains transparency in police operations and ensures legal compliance."
+    ]
+  },
+  "procedures-after-an-armed-confrontation": {
+    chapter: "2.14",
+    title: "Procedures After an Armed Confrontation",
+    content: [
+      "Immediately after an armed confrontation, the officer who is in charge of the operation, when applicable, shall:",
+      "a. Secure the site of confrontation;",
+      "b. Check whether the situation still poses imminent danger;",
+      "c. Take photographs;",
+      "d. Evacuate all wounded to the nearest hospital regardless of the extent of injury;",
+      "e. Keep arrested suspects in isolation;",
+      "f. Conduct debriefing on all involved PNP operatives;",
+      "g. Submit After-Operations Report; and",
+      "h. Ensure psychological stress counselling for all involved PNP Operatives."
+    ]
   }
 };
 

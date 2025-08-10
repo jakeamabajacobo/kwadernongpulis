@@ -21,10 +21,16 @@ const generateHref = (node: TocNode, depth: number, index: number): string => {
   if (node.title.includes('CHAPTER 2') || 
       node.title.includes('CHAPTER 3') || 
       node.title.includes('CHAPTER 4') ||
-      node.title.includes('Section 2-') ||
+      node.title.includes('Section 2-1') ||
+      node.title.includes('Section 2-2') ||
+      node.title.includes('Section 2-3') ||
+      node.title.includes('Section 2-4') ||
+      // Allow Section 2-5 topics since we have content for them
+      // node.title.includes('Section 2-5') ||
       node.title.includes('Section 3-') ||
       node.title.includes('Section 4-') ||
-      node.title.includes('2.') ||
+      // Block most 2.x topics but allow Section 2-5 topics (2.11, 2.12, 2.13, 2.14)
+      (node.title.includes('2.') && !node.title.includes('2.11') && !node.title.includes('2.12') && !node.title.includes('2.13') && !node.title.includes('2.14')) ||
       node.title.includes('3.') ||
       node.title.includes('4.')) {
     // Return empty string for chapters 2-4 to disable href links
@@ -70,7 +76,13 @@ const generateHref = (node: TocNode, depth: number, index: number): string => {
     .replace(/use\s+of\s+firearm\s+when\s+justified/, 'use-of-firearm-when-justified')
     .replace(/firing\s+at\s+moving\s+vehicles\s+is\s+prohibited/, 'firing-at-moving-vehicles-is-prohibited')
     .replace(/filing\s+of\s+an\s+incident\s+report\s+after\s+the\s+use\s+of\s+firearm/, 'filing-of-an-incident-report-after-the-use-of-firearm')
-    .replace(/procedures\s+after\s+an\s+armed\s+confrontation/, 'procedures-after-an-armed-confrontation');
+    .replace(/procedures\s+after\s+an\s+armed\s+confrontation/, 'procedures-after-an-armed-confrontation')
+    // Add specific replacements for Section 2-5 topics to ensure proper href generation
+    .replace(/section\s+2-5\s+use\s+of\s+firearm\s+during\s+police\s+operations/, 'section-2-5-use-of-firearm-during-police-operations')
+    .replace(/2\.11\s+use\s+of\s+firearm\s+when\s+justified/, '2-11-use-of-firearm-when-justified')
+    .replace(/2\.12\s+firing\s+at\s+moving\s+vehicles\s+is\s+prohibited/, '2-12-firing-at-moving-vehicles-is-prohibited')
+    .replace(/2\.13\s+filing\s+of\s+an\s+incident\s+report\s+after\s+the\s+use\s+of\s+firearm/, '2-13-filing-of-an-incident-report-after-the-use-of-firearm')
+    .replace(/2\.14\s+procedures\s+after\s+an\s+armed\s+confrontation/, '2-14-procedures-after-an-armed-confrontation');
   
   const href = `/topic/${title}`;
   
@@ -78,7 +90,13 @@ const generateHref = (node: TocNode, depth: number, index: number): string => {
   if (node.title.includes('Police Uniform and Accessories') || 
       node.title.includes('Agency Prescribed Uniform') ||
       node.title.includes('Appearing Before the Public') ||
-      node.title.includes('Carrying of Basic Police Equipment')) {
+      node.title.includes('Carrying of Basic Police Equipment') ||
+      // Add debug logging for Section 2-5 topics
+      node.title.includes('Section 2-5') ||
+      node.title.includes('2.11') ||
+      node.title.includes('2.12') ||
+      node.title.includes('2.13') ||
+      node.title.includes('2.14')) {
     console.log(`generateHref for "${node.title}":`, {
       originalTitle: node.title,
       afterToLowerCase: node.title.toLowerCase(),
@@ -260,6 +278,12 @@ export const TocTable: React.FC<TocTableProps> = ({ data }) => {
       return;
     }
     
+    // Allow navigation to Section 2-5 topics (2.11, 2.12, 2.13, 2.14) since we have content for them
+    if (["2.11 Use of Firearm When Justified", "2.12 Firing at Moving Vehicles is prohibited", "2.13 Filing of an Incident Report After the Use of Firearm", "2.14 Procedures After an Armed Confrontation"].includes(node.title)) {
+      console.log(`Row click on "${node.title}" - navigating to Section 2-5 topic.`);
+      // Continue with navigation
+    }
+    
     const topicId = href.replace('/topic/', '');
     const hasAssociatedContent = !!contentData[topicId]; // Check if content exists for this node's generated ID
     
@@ -267,7 +291,13 @@ export const TocTable: React.FC<TocTableProps> = ({ data }) => {
     if (node.title.includes('Police Uniform and Accessories') || 
         node.title.includes('Agency Prescribed Uniform') ||
         node.title.includes('Appearing Before the Public') ||
-        node.title.includes('Carrying of Basic Police Equipment')) {
+        node.title.includes('Carrying of Basic Police Equipment') ||
+        // Add debug logging for Section 2-5 topics
+        node.title.includes('Section 2-5') ||
+        node.title.includes('2.11') ||
+        node.title.includes('2.12') ||
+        node.title.includes('2.13') ||
+        node.title.includes('2.14')) {
       console.log(`handleRowClick for "${node.title}":`, { node, href, hasChildren: hasChildren(node), hasAssociatedContent, topicId });
     }
     
