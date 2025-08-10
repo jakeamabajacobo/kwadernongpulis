@@ -44,14 +44,15 @@ export const tocData: TocNode[] = [
     page: 4,
     children: [
       { 
-        title: "Section 2-1 Pre-Operational Clearance", 
-        page: 4,
-        children: [
-          { 
-            title: "In all planned police operations, the team leader of the operating team/s shall secure a Pre-Operation Clearance prior to the conduct of operation. This clearance must be approved by their Chief/Commander/Head of Office/Unit and must be submitted at the Operations Section/Division of the concerned operating police units for record purposes.", 
-            page: 4 
-          }
-        ]
+        title: "Section 2-1 Pre-Operational Clearance"
+        // , 
+        // page: 4,
+        // children: [
+        //   { 
+        //     title: "In all planned police operations, the team leader of the operating team/s shall secure a Pre-Operation Clearance prior to the conduct of operation. This clearance must be approved by their Chief/Commander/Head of Office/Unit and must be submitted at the Operations Section/Division of the concerned operating police units for record purposes.", 
+        //     page: 4 
+        //   }
+        // ]
       },
       {
         title: "Section 2-2 Coordination",
