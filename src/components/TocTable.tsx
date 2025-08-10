@@ -254,8 +254,8 @@ export const TocTable: React.FC<TocTableProps> = ({ data }) => {
       return;
     }
     
-    // Don't navigate for sections 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, and 2.9 since content is displayed directly
-    if (["2.1 Inter-Office Coordination", "2.2 Coordination by Filing Coordination Form", "2.3 Coordination by Practical/Available Means of Communication", "2.4 Basic Requirements", "2.5 Use of Megaphones and Similar Instruments/devices", "2.6 Accessories", "2.7 Use of Body Worn Camera", "2.8 Application of Necessary and Reasonable Force", "2.9 The Force Continuum"].includes(node.title)) {
+    // Don't navigate for sections 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, and 2.10 since content is displayed directly
+    if (["2.1 Inter-Office Coordination", "2.2 Coordination by Filing Coordination Form", "2.3 Coordination by Practical/Available Means of Communication", "2.4 Basic Requirements", "2.5 Use of Megaphones and Similar Instruments/devices", "2.6 Accessories", "2.7 Use of Body Worn Camera", "2.8 Application of Necessary and Reasonable Force", "2.9 The Force Continuum", "2.10 Responsibility of the Police Officer in Charge of the Operations"].includes(node.title)) {
       console.log(`Row click on "${node.title}" - content displayed directly, not navigating.`);
       return;
     }
@@ -309,13 +309,13 @@ export const TocTable: React.FC<TocTableProps> = ({ data }) => {
                 key={key}
                 className={`
               transition-all duration-300 hover:shadow-lg hover:scale-[1.02]
-              ${hasChildren(node) && !["CHAPTER 1 GENERAL GUIDELINES", "1.1 Agency Prescribed Uniform", "1.2 Appearing Before the Public", "1.3 Carrying of Basic Police Equipment", "1.4 Patrol Operations", "1.5 Law Enforcement Operations", "1.6 Internal Security Operations", "1.7 Public Safety Operations", "1.8 Special Police Operations", "1.9 Investigation Operations", "1.10 Police Community Relations", "2.1 Inter-Office Coordination", "2.2 Coordination by Filing Coordination Form", "2.3 Coordination by Practical/Available Means of Communication", "2.4 Basic Requirements", "2.5 Use of Megaphones and Similar Instruments/devices", "2.6 Accessories", "2.7 Use of Body Worn Camera", "2.8 Application of Necessary and Reasonable Force", "2.9 The Force Continuum", "Section 1-1 Police Uniform and Accessories", "Section 1-2 Categories of Police Operations"].includes(node.title) && href && href !== '' ? 'cursor-pointer hover:bg-accent/30' : ''}
+              ${hasChildren(node) && !["CHAPTER 1 GENERAL GUIDELINES", "1.1 Agency Prescribed Uniform", "1.2 Appearing Before the Public", "1.3 Carrying of Basic Police Equipment", "1.4 Patrol Operations", "1.5 Law Enforcement Operations", "1.6 Internal Security Operations", "1.7 Public Safety Operations", "1.8 Special Police Operations", "1.9 Investigation Operations", "1.10 Police Community Relations", "2.1 Inter-Office Coordination", "2.2 Coordination by Filing Coordination Form", "2.3 Coordination by Practical/Available Means of Communication", "2.4 Basic Requirements", "2.5 Use of Megaphones and Similar Instruments/devices", "2.6 Accessories", "2.7 Use of Body Worn Camera", "2.8 Application of Necessary and Reasonable Force", "2.9 The Force Continuum", "2.10 Responsibility of the Police Officer in Charge of the Operations", "Section 1-1 Police Uniform and Accessories", "Section 1-2 Categories of Police Operations"].includes(node.title) && href && href !== '' ? 'cursor-pointer hover:bg-accent/30' : ''}
               ${depth === 0 ? 'border-l-4 border-l-primary bg-gradient-to-r from-primary/5 to-transparent shadow-md' : ''}
               ${depth === 1 ? 'border-l-4 border-l-secondary bg-gradient-to-r from-secondary/5 to-transparent shadow-sm' : ''}
               ${depth >= 2 ? 'border-l-2 border-l-muted bg-gradient-to-r from-muted/5 to-transparent' : ''}
                   ${isVisible ? 'opacity-100' : 'opacity-50'}
                 `}
-            onClick={!["CHAPTER 1 GENERAL GUIDELINES", "1.1 Agency Prescribed Uniform", "1.2 Appearing Before the Public", "1.3 Carrying of Basic Police Equipment", "1.4 Patrol Operations", "1.5 Law Enforcement Operations", "1.6 Internal Security Operations", "1.7 Public Safety Operations", "1.8 Special Police Operations", "1.9 Investigation Operations", "1.10 Police Community Relations", "2.1 Inter-Office Coordination", "2.2 Coordination by Filing Coordination Form", "2.3 Coordination by Practical/Available Means of Communication", "2.4 Basic Requirements", "2.5 Use of Megaphones and Similar Instruments/devices", "2.6 Accessories", "2.7 Use of Body Worn Camera", "Section 1-1 Police Uniform and Accessories", "Section 1-2 Categories of Police Operations"].includes(node.title) && href && href !== '' ? () => handleRowClick(node, href) : undefined}
+            onClick={!["CHAPTER 1 GENERAL GUIDELINES", "1.1 Agency Prescribed Uniform", "1.2 Appearing Before the Public", "1.3 Carrying of Basic Police Equipment", "1.4 Patrol Operations", "1.5 Law Enforcement Operations", "1.6 Internal Security Operations", "1.7 Public Safety Operations", "1.8 Special Police Operations", "1.9 Investigation Operations", "1.10 Police Community Relations", "2.1 Inter-Office Coordination", "2.2 Coordination by Filing Coordination Form", "2.3 Coordination by Practical/Available Means of Communication", "2.4 Basic Requirements", "2.5 Use of Megaphones and Similar Instruments/devices", "2.6 Accessories", "2.7 Use of Body Worn Camera", "2.8 Application of Necessary and Reasonable Force", "2.9 The Force Continuum", "2.10 Responsibility of the Police Officer in Charge of the Operations", "Section 1-1 Police Uniform and Accessories", "Section 1-2 Categories of Police Operations"].includes(node.title) && href && href !== '' ? () => handleRowClick(node, href) : undefined}
           >
             <CardHeader className="pb-3">
               <div className="flex items-center justify-between">
@@ -836,12 +836,95 @@ export const TocTable: React.FC<TocTableProps> = ({ data }) => {
                         
                         <div>
                           <h5 className="text-sm font-semibold text-muted-foreground mb-2">2) Less Lethal Approach</h5>
-                          <p className="text-sm text-muted-foreground">
+                          <p className="text-sm text-muted-foreground mb-3">
                             This involves the employment of less lethal equipment that do not cause serious injury and/or death and that less physical measures have been tried and deemed inappropriate purposely to ensure cooperation, compliance or surrender. The age, gender and health condition of offenders shall be considered before the employment of less lethal equipment.
                           </p>
+                          
+                          <div className="bg-muted/30 rounded-lg p-3 mb-3">
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+                              <div className="font-medium text-primary">Suspect Threats or Resistance</div>
+                              <div className="font-medium text-primary">Aggressive Resistance</div>
+                              <div className="font-medium text-primary">Police Response/Equipment</div>
+                            </div>
+                            
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-2 mt-2">
+                              <div className="text-muted-foreground">• Non-compliant, uncooperative and verbally abusive.</div>
+                              <div className="text-muted-foreground">• As much as possible, the employment of reasonable force will not result to serious injury.</div>
+                              <div className="text-muted-foreground">• Less Lethal Equipment</div>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div>
+                          <h5 className="text-sm font-semibold text-muted-foreground mb-2">3) Lethal Approach</h5>
+                          <p className="text-sm text-muted-foreground mb-3">
+                            This involves the employment of lethal force when there is an immediate threat of death or serious bodily injury.
+                          </p>
+                          
+                          <div className="bg-muted/30 rounded-lg p-3 mb-3">
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+                              <div className="font-medium text-primary">Suspect Threats or Resistance</div>
+                              <div className="font-medium text-primary">Deadly Force</div>
+                              <div className="font-medium text-primary">Police Response/Equipment</div>
+                            </div>
+                            
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-2 mt-2">
+                              <div className="text-muted-foreground">• Non-compliant, uncooperative and verbally abusive.</div>
+                              <div className="text-muted-foreground">• As much as possible, the employment of reasonable force will not result to serious injury.</div>
+                              <div className="text-muted-foreground">• Firearm</div>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div>
+                          <h5 className="text-sm font-semibold text-muted-foreground mb-2">b. Guidelines on the De-Escalation of Response</h5>
+                          <p className="text-sm text-muted-foreground mb-3">
+                            De-escalation techniques should be employed whenever possible to reduce the need for force.
+                          </p>
+                          
+                          <div className="bg-muted/30 rounded-lg p-3 mb-3">
+                            <div className="space-y-2">
+                              <div className="text-muted-foreground">• Personnel must be trained in verbal de-escalation and conflict resolution strategies.</div>
+                              <div className="text-muted-foreground">• The goal is to resolve situations peacefully while maintaining officer and public safety.</div>
+                              <div className="text-muted-foreground">• De-escalation should be attempted before escalating to higher levels of force.</div>
+                              <div className="text-muted-foreground">• All de-escalation attempts must be properly documented and evaluated.</div>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
+                  </div>
+                </div>
+              )}
+              
+              {node.title === "2.10 Responsibility of the Police Officer in Charge of the Operations" && (
+                <div className="mt-2 p-4 bg-gradient-to-r from-primary/5 to-primary/10 rounded-lg border border-primary/20">
+                  <div className="flex items-center gap-2 mb-2">
+                    <FileTextIcon className="h-4 w-4 text-primary" />
+                    <span className="text-sm font-medium text-primary">Topic Content</span>
+                  </div>
+                  <div className="text-sm text-muted-foreground leading-relaxed space-y-3">
+                    <p>
+                      <strong>2.10 Responsibility of the Police Officer in Charge of the Operations:</strong> The police officer in charge of the operations has the primary responsibility for the conduct and outcome of police operations. This includes ensuring proper planning, coordination, execution, and post-operation evaluation.
+                    </p>
+                    
+                    <div className="bg-muted/30 rounded-lg p-3 mb-3">
+                      <h5 className="text-sm font-semibold text-primary mb-2">Key Responsibilities:</h5>
+                      <div className="space-y-2">
+                        <div className="text-muted-foreground">• Ensuring all personnel are properly briefed and equipped for the operation</div>
+                        <div className="text-muted-foreground">• Coordinating with other units and agencies as required</div>
+                        <div className="text-muted-foreground">• Monitoring the progress of the operation and making necessary adjustments</div>
+                        <div className="text-muted-foreground">• Ensuring compliance with all policies, procedures, and legal requirements</div>
+                        <div className="text-muted-foreground">• Providing proper supervision and oversight of all personnel</div>
+                        <div className="text-muted-foreground">• Ensuring proper documentation and reporting of all activities</div>
+                        <div className="text-muted-foreground">• Conducting post-operation debriefings and evaluations</div>
+                        <div className="text-muted-foreground">• Implementing lessons learned for future operations</div>
+                      </div>
+                    </div>
+                    
+                    <p>
+                      <strong>Accountability:</strong> The officer in charge is ultimately accountable for the success or failure of the operation and must ensure that all actions are conducted within the bounds of law and policy.
+                    </p>
                   </div>
                 </div>
               )}
