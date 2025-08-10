@@ -233,8 +233,8 @@ export const TocTable: React.FC<TocTableProps> = ({ data }) => {
       return;
     }
     
-    // Don't navigate for sections 2.1, 2.2, and 2.3 since content is displayed directly
-    if (["2.1 Inter-Office Coordination", "2.2 Coordination by Filing Coordination Form", "2.3 Coordination by Practical/Available Means of Communication"].includes(node.title)) {
+    // Don't navigate for sections 2.1, 2.2, 2.3, 2.4, 2.5, and 2.6 since content is displayed directly
+    if (["2.1 Inter-Office Coordination", "2.2 Coordination by Filing Coordination Form", "2.3 Coordination by Practical/Available Means of Communication", "2.4 Basic Requirements", "2.5 Use of Megaphones and Similar Instruments/devices", "2.6 Accessories"].includes(node.title)) {
       console.log(`Row click on "${node.title}" - content displayed directly, not navigating.`);
       return;
     }
@@ -288,13 +288,13 @@ export const TocTable: React.FC<TocTableProps> = ({ data }) => {
                 key={key}
                 className={`
               transition-all duration-300 hover:shadow-lg hover:scale-[1.02]
-              ${hasChildren(node) && !["CHAPTER 1 GENERAL GUIDELINES", "1.1 Agency Prescribed Uniform", "1.2 Appearing Before the Public", "1.3 Carrying of Basic Police Equipment", "1.4 Patrol Operations", "1.5 Law Enforcement Operations", "1.6 Internal Security Operations", "1.7 Public Safety Operations", "1.8 Special Police Operations", "1.9 Investigation Operations", "1.10 Police Community Relations", "2.1 Inter-Office Coordination", "2.2 Coordination by Filing Coordination Form", "2.3 Coordination by Practical/Available Means of Communication", "Section 1-1 Police Uniform and Accessories", "Section 1-2 Categories of Police Operations"].includes(node.title) ? 'cursor-pointer hover:bg-accent/30' : ''}
+              ${hasChildren(node) && !["CHAPTER 1 GENERAL GUIDELINES", "1.1 Agency Prescribed Uniform", "1.2 Appearing Before the Public", "1.3 Carrying of Basic Police Equipment", "1.4 Patrol Operations", "1.5 Law Enforcement Operations", "1.6 Internal Security Operations", "1.7 Public Safety Operations", "1.8 Special Police Operations", "1.9 Investigation Operations", "1.10 Police Community Relations", "2.1 Inter-Office Coordination", "2.2 Coordination by Filing Coordination Form", "2.3 Coordination by Practical/Available Means of Communication", "2.4 Basic Requirements", "2.5 Use of Megaphones and Similar Instruments/devices", "2.6 Accessories", "Section 1-1 Police Uniform and Accessories", "Section 1-2 Categories of Police Operations"].includes(node.title) ? 'cursor-pointer hover:bg-accent/30' : ''}
               ${depth === 0 ? 'border-l-4 border-l-primary bg-gradient-to-r from-primary/5 to-transparent shadow-md' : ''}
               ${depth === 1 ? 'border-l-4 border-l-secondary bg-gradient-to-r from-secondary/5 to-transparent shadow-sm' : ''}
               ${depth >= 2 ? 'border-l-2 border-l-muted bg-gradient-to-r from-muted/5 to-transparent' : ''}
                   ${isVisible ? 'opacity-100' : 'opacity-50'}
                 `}
-            onClick={!["CHAPTER 1 GENERAL GUIDELINES", "1.1 Agency Prescribed Uniform", "1.2 Appearing Before the Public", "1.3 Carrying of Basic Police Equipment", "1.4 Patrol Operations", "1.5 Law Enforcement Operations", "1.6 Internal Security Operations", "1.7 Public Safety Operations", "1.8 Special Police Operations", "1.9 Investigation Operations", "1.10 Police Community Relations", "2.1 Inter-Office Coordination", "2.2 Coordination by Filing Coordination Form", "2.3 Coordination by Practical/Available Means of Communication", "Section 1-1 Police Uniform and Accessories", "Section 1-2 Categories of Police Operations"].includes(node.title) ? () => handleRowClick(node, href) : undefined}
+            onClick={!["CHAPTER 1 GENERAL GUIDELINES", "1.1 Agency Prescribed Uniform", "1.2 Appearing Before the Public", "1.3 Carrying of Basic Police Equipment", "1.4 Patrol Operations", "1.5 Law Enforcement Operations", "1.6 Internal Security Operations", "1.7 Public Safety Operations", "1.8 Special Police Operations", "1.9 Investigation Operations", "1.10 Police Community Relations", "2.1 Inter-Office Coordination", "2.2 Coordination by Filing Coordination Form", "2.3 Coordination by Practical/Available Means of Communication", "2.4 Basic Requirements", "2.5 Use of Megaphones and Similar Instruments/devices", "2.6 Accessories", "Section 1-1 Police Uniform and Accessories", "Section 1-2 Categories of Police Operations"].includes(node.title) ? () => handleRowClick(node, href) : undefined}
           >
             <CardHeader className="pb-3">
               <div className="flex items-center justify-between">
@@ -581,6 +581,42 @@ export const TocTable: React.FC<TocTableProps> = ({ data }) => {
                   </div>
                   <p className="text-sm text-muted-foreground leading-relaxed">
                     In cases where formal inter-unit coordination is not feasible, the Police Unit concerned shall endeavor to notify the Local Police Unit (LPU) through any practical/available means of communication including but not limited to electronic or signal communication at any time before the operation and shall accomplish and furnish the LPU a written incident report immediately after the termination of the operation.
+                  </p>
+                </div>
+              )}
+              
+              {node.title === "2.4 Basic Requirements" && (
+                <div className="mt-2 p-4 bg-gradient-to-r from-primary/5 to-primary/10 rounded-lg border border-primary/20">
+                  <div className="flex items-center gap-2 mb-2">
+                    <FileTextIcon className="h-4 w-4 text-primary" />
+                    <span className="text-sm font-medium text-primary">Topic Content</span>
+                  </div>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Police operations such as but not limited to arrest, search and seizure, checkpoint, roadblocks, and civil disturbance management shall, whenever applicable and practicable, be conducted as follows: a. With marked police vehicle; b. Led by a Police Commissioned Officer (PCO) or the most senior Police Non-Commissioned Officer (PNCO) in the absence or unavailability of a PCO; and c. With personnel in prescribed police uniform except for covert operatives when serving warrant of arrest provided personnel in uniform shall be present during the arrest d. With the use of Body Worn Cameras (BWCs) and/or Alternative Recording Devices (ARDs) during the conduct of searches and arrests.
+                  </p>
+                </div>
+              )}
+              
+              {node.title === "2.5 Use of Megaphones and Similar Instruments/devices" && (
+                <div className="mt-2 p-4 bg-gradient-to-r from-primary/5 to-primary/10 rounded-lg border border-primary/20">
+                  <div className="flex items-center gap-2 mb-2">
+                    <FileTextIcon className="h-4 w-4 text-primary" />
+                    <span className="text-sm font-medium text-primary">Topic Content</span>
+                  </div>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    During actual police intervention operations, the Team Leader shall use peaceful means including the use of megaphones or any other similar instruments/devices to warn or influence the offender/s or suspect/s to stop and/or peacefully surrender.
+                  </p>
+                </div>
+              )}
+              
+              {node.title === "2.6 Accessories" && (
+                <div className="mt-2 p-4 bg-gradient-to-r from-primary/5 to-primary/10 rounded-lg border border-primary/20">
+                  <div className="flex items-center gap-2 mb-2">
+                    <FileTextIcon className="h-4 w-4 text-primary" />
+                    <span className="text-sm font-medium text-primary">Topic Content</span>
+                  </div>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    A police officer may carry or use accessories appropriate to the police operation being performed. Accessories may include, ballistic vest, handheld radio, first aid kit, flashlight, hand cuff, whistle and non-lethal equipment Chapter 2 PNPM-DO-D-0-2-13-21 RESTRICTED RESTRICTED 6 including but not limited to baton, truncheon, and night stick to be used in a nonarmed confrontation with a violent, uncooperative and unruly offender.
                   </p>
                 </div>
               )}
