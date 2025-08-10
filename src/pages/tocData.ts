@@ -19,7 +19,7 @@ export const tocData: TocNode[] = [
         title: "Section 1-1 Police Uniform and Accessories",
         page: 2,
         children: [
-          { title: "1.1 Agency Prescribed Uniform", page: 2 },
+          { title: "1.1 Agency Prescribed Uniform: A police officer shall always wear the prescribed uniform for the kind of police operation to be undertaken", page: 2 },
           { title: "1.2 Appearing Before the Public", page: 2 },
           { title: "1.3 Carrying of Basic Police Equipment", page: 2 },
         ],

@@ -51,53 +51,39 @@ export const contentData: Record<string, ContentData> = {
   },
   "section-1-1-police-uniform-and-accessories": {
     id: "section-1-1-police-uniform-and-accessories",
-    title: "Police Uniform and Accessories",
+    title: "Section 1-1 Police Uniform and Accessories",
     chapter: "Section 1-1",
     content: [
-      "Police uniform and accessories are essential components of professional law enforcement appearance and functionality.",
-      "Proper uniform standards ensure public recognition, authority, and professional image of police personnel.",
-      "All uniform items must be properly maintained and worn according to established protocols.",
-      "The uniform serves as a symbol of authority and must be worn with pride and dignity.",
-      "Accessories must be properly positioned and maintained for optimal functionality during operations."
+      "1.1 Agency Prescribed Uniform. A police officer shall always wear the prescribed uniform for the kind of police operation to be undertaken (Annex \"A\").",
+      "1.2 Appearing Before the Public. When wearing the police uniform, a police officer shall, at all times, appear to look presentable, respectable, smart, and well-groomed. A police officer shall refrain from doing unnecessary activities and/or actions while on duty.",
+      "1.3 Carrying of Basic Police Equipment. Every police officer on patrol, whether on board a vehicle or on foot patrol, shall always carry with him/her his/her issued firearm, and other equipment such as but not limited to restraint device, impact device and personal protective equipment. He/she shall also use other accessories required for the specific police operation being conducted."
     ],
     page: 2
   },
   "1-1-agency-prescribed-uniform": {
     id: "1-1-agency-prescribed-uniform",
-    title: "Agency Prescribed Uniform",
+    title: "1.1 Agency Prescribed Uniform:",
     chapter: "1.1",
     content: [
-      "All police officers must wear the officially prescribed uniform as designated by the Philippine National Police.",
-      "The uniform must be clean, properly fitted, and worn with appropriate accessories and insignia.",
-      "Uniform standards include proper grooming, footwear, and equipment placement for optimal functionality.",
-      "The prescribed uniform includes the standard PNP uniform with proper insignia and rank indicators.",
-      "All personnel must ensure their uniform is in good condition and properly pressed before duty."
+      "A police officer shall always wear the prescribed uniform for the kind of police operation to be undertaken (Annex \"A\")."
     ],
     page: 2
   },
   "1-2-appearing-before-the-public": {
     id: "1-2-appearing-before-the-public",
-    title: "Appearing Before the Public",
+    title: "1.2 Appearing Before the Public",
     chapter: "1.2",
     content: [
-      "Police officers must maintain professional appearance and conduct when interacting with the public.",
-      "Proper demeanor, respectful communication, and appropriate behavior are essential for public trust.",
-      "Officers must represent the PNP with dignity and uphold the organization's values in all public interactions.",
-      "Professional appearance includes proper grooming, clean uniform, and appropriate accessories.",
-      "All interactions with the public must be conducted with courtesy, respect, and professionalism."
+      "When wearing the police uniform, a police officer shall, at all times, appear to look presentable, respectable, smart, and well-groomed. A police officer shall refrain from doing unnecessary activities and/or actions while on duty."
     ],
     page: 2
   },
   "1-3-carrying-of-basic-police-equipment": {
     id: "1-3-carrying-of-basic-police-equipment",
-    title: "Carrying of Basic Police Equipment",
+    title: "1.3 Carrying of Basic Police Equipment",
     chapter: "1.3",
     content: [
-      "All police officers must carry prescribed basic equipment necessary for the performance of their duties and personal protection.",
-      "Basic equipment includes service weapons, handcuffs, radio communication devices, identification, and other items as specified by policy.",
-      "Proper maintenance and inspection of equipment ensures operational readiness and officer safety during field operations.",
-      "Equipment must be properly secured and accessible when needed during operations.",
-      "Regular inspection and maintenance of equipment is mandatory for all personnel."
+      "Every police officer on patrol, whether on board a vehicle or on foot patrol, shall always carry with him/her his/her issued firearm, and other equipment such as but not limited to restraint device, impact device and personal protective equipment. He/she shall also use other accessories required for the specific police operation being conducted."
     ],
     page: 2
   },

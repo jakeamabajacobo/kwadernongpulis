@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, BookOpen, Calendar, FileText } from "lucide-react";
+import { ArrowLeft, Calendar, FileText } from "lucide-react";
 import { Header } from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { contentData, ContentData } from "@/data/contentData";
@@ -25,7 +25,7 @@ const TopicPage: React.FC = () => {
         <div className="container mx-auto px-4 py-8">
           <div className="max-w-4xl mx-auto">
             <div className="bg-card rounded-lg shadow-lg p-8 text-center">
-              <BookOpen className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
+              <FileText className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
               <h1 className="text-2xl font-bold text-foreground mb-4">Topic Not Found</h1>
               <p className="text-muted-foreground mb-6">
                 The requested topic "{topicId}" could not be found. Please check the URL or return to the table of contents.
@@ -47,41 +47,41 @@ const TopicPage: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-reading-bg">
+    <div className="min-h-screen bg-[#f5f5dc]">
       <Header />
       
-      <div className="container mx-auto px-4 py-6 max-w-4xl">
+      <div className="container mx-auto px-4 py-6 max-w-5xl">
         {/* Navigation */}
         <div className="mb-6">
           <Link to="/">
-            <Button variant="ghost" className="mb-4 pl-0">
+            <Button variant="ghost" className="mb-4 pl-0 text-gray-700 hover:text-gray-900">
               <ArrowLeft className="h-4 w-4 mr-2" />
               Back to Table of Contents
             </Button>
           </Link>
         </div>
         
-        {/* Content */}
-        <article className="bg-card rounded-lg shadow-lg p-8 border border-border/50">
-          {/* Header */}
+        {/* Main Content Card */}
+        <article className="bg-white rounded-lg shadow-lg p-8 border border-gray-200">
+          {/* Header Section */}
           <div className="mb-8">
             <div className="flex items-center gap-3 mb-4">
-              <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary/10">
-                <FileText className="h-6 w-6 text-primary" />
+              <div className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-100">
+                <FileText className="h-6 w-6 text-blue-600" />
               </div>
               <div>
-                <h1 className="text-3xl font-bold text-foreground bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
+                <h1 className="text-3xl font-bold text-blue-800">
                   {content.title}
                 </h1>
-                <p className="text-lg text-muted-foreground">
-                  {content.chapter}
+                <p className="text-lg text-gray-600 mt-1">
+                  {content.title}
                 </p>
               </div>
             </div>
             
             {/* Page number */}
             {content.page && (
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <div className="flex items-center gap-2 text-sm text-gray-500">
                 <Calendar className="h-4 w-4" />
                 <span>Page {content.page}</span>
               </div>
@@ -89,38 +89,66 @@ const TopicPage: React.FC = () => {
           </div>
           
           {/* Content paragraphs */}
-          <div className="space-y-6">
+          <div className="space-y-6 mb-8">
             {content.content.map((paragraph, index) => (
-              <div key={index} className="prose prose-lg max-w-none">
-                <p className="text-reading-text leading-relaxed text-base">
+              <div key={index}>
+                <p className="text-gray-700 leading-relaxed text-base">
                   {paragraph}
                 </p>
               </div>
             ))}
           </div>
           
-          {/* Additional information */}
-          <div className="mt-8 pt-6 border-t border-border/50">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="bg-muted/30 rounded-lg p-4">
-                <h3 className="font-semibold text-foreground mb-2">Key Points</h3>
-                <ul className="text-sm text-muted-foreground space-y-1">
-                  <li>• Follow established procedures and protocols</li>
-                  <li>• Maintain professional standards at all times</li>
-                  <li>• Ensure compliance with legal requirements</li>
-                  <li>• Prioritize public safety and security</li>
-                </ul>
-              </div>
-              
-              <div className="bg-muted/30 rounded-lg p-4">
-                <h3 className="font-semibold text-foreground mb-2">Related Topics</h3>
-                <div className="text-sm text-muted-foreground space-y-1">
-                  <p>• Police Operations Procedures</p>
-                  <p>• Law Enforcement Guidelines</p>
-                  <p>• Public Safety Protocols</p>
-                  <p>• Community Relations</p>
-                </div>
-              </div>
+          {/* Bottom Sections */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Key Points Section */}
+            <div className="bg-gray-100 rounded-lg p-6 rounded-b-lg">
+              <h3 className="font-semibold text-gray-800 mb-4 text-lg">Key Points</h3>
+              <ul className="text-sm text-gray-700 space-y-2">
+                <li className="flex items-start gap-2">
+                  <span className="w-2 h-2 bg-gray-600 rounded-full mt-2 flex-shrink-0"></span>
+                  <span>Follow established procedures and protocols</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="w-2 h-2 bg-gray-600 rounded-full mt-2 flex-shrink-0"></span>
+                  <span>Maintain professional standards at all times</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="w-2 h-2 bg-gray-600 rounded-full mt-2 flex-shrink-0"></span>
+                  <span>Ensure compliance with legal requirements</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="w-2 h-2 bg-gray-600 rounded-full mt-2 flex-shrink-0"></span>
+                  <span>Prioritize public safety and security</span>
+                </li>
+              </ul>
+            </div>
+            
+            {/* Related Topics Section */}
+            <div className="bg-gray-100 rounded-lg p-6 rounded-b-lg">
+              <h3 className="font-semibold text-gray-800 mb-4 text-lg">Related Topics</h3>
+              <ul className="text-sm text-gray-700 space-y-2">
+                <li className="flex items-start gap-2">
+                  <span className="w-2 h-2 bg-gray-600 rounded-full mt-2 flex-shrink-0"></span>
+                  <span>Police Operations Procedures</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="w-2 h-2 bg-gray-600 rounded-full mt-2 flex-shrink-0"></span>
+                  <span>Law Enforcement Guidelines</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="w-2 h-2 bg-gray-600 rounded-full mt-2 flex-shrink-0"></span>
+                  <span>Public Safety Protocols</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="w-2 h-2 bg-gray-600 rounded-full mt-2 flex-shrink-0"></span>
+                  <span>Community Relations</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="w-2 h-2 bg-gray-600 rounded-full mt-2 flex-shrink-0"></span>
+                  <span>Operational Standards</span>
+                </li>
+              </ul>
             </div>
           </div>
         </article>

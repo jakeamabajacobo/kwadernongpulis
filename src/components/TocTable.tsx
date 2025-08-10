@@ -11,6 +11,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { TocNode } from "@/pages/tocData";
+import { contentData } from "@/data/contentData";
 
 // Helper function to generate href for a topic
 const generateHref = (node: TocNode, depth: number, index: number): string => {
@@ -62,7 +63,25 @@ const generateHref = (node: TocNode, depth: number, index: number): string => {
     .replace(/filing\s+of\s+an\s+incident\s+report\s+after\s+the\s+use\s+of\s+firearm/, 'filing-of-an-incident-report-after-the-use-of-firearm')
     .replace(/procedures\s+after\s+an\s+armed\s+confrontation/, 'procedures-after-an-armed-confrontation');
   
-  return `/topic/${title}`;
+  const href = `/topic/${title}`;
+  
+  // Debug logging for specific items
+  if (node.title.includes('Police Uniform and Accessories') || 
+      node.title.includes('Agency Prescribed Uniform') ||
+      node.title.includes('Appearing Before the Public') ||
+      node.title.includes('Carrying of Basic Police Equipment')) {
+    console.log(`generateHref for "${node.title}":`, {
+      originalTitle: node.title,
+      afterToLowerCase: node.title.toLowerCase(),
+      afterReplaceSpecialChars: node.title.toLowerCase().replace(/[^a-z0-9\s]/g, ''),
+      afterReplaceSpaces: node.title.toLowerCase().replace(/[^a-z0-9\s]/g, '').replace(/\s+/g, '-'),
+      afterReplaceSection: node.title.toLowerCase().replace(/[^a-z0-9\s]/g, '').replace(/\s+/g, '-').replace(/section\s+(\d+)-(\d+)/, 'section-$1-$2'),
+      finalTitle: title,
+      finalHref: href
+    });
+  }
+  
+  return href;
 };
 
 // Helper function to flatten the tree structure for table display
@@ -188,11 +207,43 @@ export const TocTable: React.FC<TocTableProps> = ({ data }) => {
   };
   
   const handleRowClick = (node: TocNode, href: string) => {
-    if (hasChildren(node)) {
+    // Don't navigate for 1.1 Agency Prescribed Uniform since content is displayed directly
+    if (node.title === "1.1 Agency Prescribed Uniform") {
+      console.log(`Row click on "${node.title}" - content displayed directly, not navigating.`);
+      return;
+    }
+    
+    // Don't navigate for Section 1-1 Police Uniform and Accessories
+    if (node.title === "Section 1-1 Police Uniform and Accessories") {
+      console.log(`Row click on "${node.title}" - not navigating.`);
+      return;
+    }
+    
+    const topicId = href.replace('/topic/', '');
+    const hasAssociatedContent = !!contentData[topicId]; // Check if content exists for this node's generated ID
+    
+    // Debug logging for specific items
+    if (node.title.includes('Police Uniform and Accessories') || 
+        node.title.includes('Agency Prescribed Uniform') ||
+        node.title.includes('Appearing Before the Public') ||
+        node.title.includes('Carrying of Basic Police Equipment')) {
+      console.log(`handleRowClick for "${node.title}":`, { node, href, hasChildren: hasChildren(node), hasAssociatedContent, topicId });
+    }
+    
+    if (hasAssociatedContent) {
+      // If this node has content, navigate to its topic page
+      console.log(`Navigating to: ${href}`);
+      navigate(href);
+    } else if (hasChildren(node)) {
+      // If it has children but NO direct content, clicking the row should just toggle expansion.
+      // However, the current setup relies on the expand button for toggling.
+      // So, if it's a parent without direct content, the row click should do nothing.
+      console.log(`Row click on "${node.title}" (no direct content, has children). Not navigating.`);
       // Don't navigate, just toggle expansion
       return;
     } else {
       // Navigate to topic page
+      console.log(`Navigating to: ${href}`);
       navigate(href);
     }
   };
@@ -226,33 +277,146 @@ export const TocTable: React.FC<TocTableProps> = ({ data }) => {
                 key={key}
                 className={`
                   table-row-elegant shadow-elegant hover:shadow-elegant-hover
-                  ${hasChildren(node) ? 'cursor-pointer' : ''}
+                  ${hasChildren(node) && !["CHAPTER 1 GENERAL GUIDELINES", "1.1 Agency Prescribed Uniform", "1.2 Appearing Before the Public", "1.3 Carrying of Basic Police Equipment", "1.4 Patrol Operations", "1.5 Law Enforcement Operations", "1.6 Internal Security Operations", "1.7 Public Safety Operations", "1.8 Special Police Operations", "1.9 Investigation Operations", "1.10 Police Community Relations", "Section 1-1 Police Uniform and Accessories", "Section 1-2 Categories of Police Operations"].includes(node.title) ? 'cursor-pointer' : ''}
                   ${depth === 0 ? 'font-semibold bg-primary/5 border-l-4 border-primary' : ''}
                   ${depth === 1 ? 'font-medium bg-secondary/30 border-l-2 border-secondary' : ''}
                   ${depth >= 2 ? 'text-sm border-l border-muted' : ''}
                   hover:bg-accent/50
                   ${isVisible ? 'opacity-100' : 'opacity-50'}
                 `}
-                onClick={() => handleRowClick(node, href)}
+                onClick={!["CHAPTER 1 GENERAL GUIDELINES", "1.1 Agency Prescribed Uniform", "1.2 Appearing Before the Public", "1.3 Carrying of Basic Police Equipment", "1.4 Patrol Operations", "1.5 Law Enforcement Operations", "1.6 Internal Security Operations", "1.7 Public Safety Operations", "1.8 Special Police Operations", "1.9 Investigation Operations", "1.10 Police Community Relations", "Section 1-1 Police Uniform and Accessories", "Section 1-2 Categories of Police Operations"].includes(node.title) ? () => handleRowClick(node, href) : undefined}
               >
                 <TableCell style={getRowStyle(depth)} className="table-cell-elegant">
                   <div className="flex items-center gap-3">
                     <div className="flex items-center justify-center w-6 h-6 rounded-full bg-primary/10 hover:bg-primary/20 transition-colors">
                       {getExpandIcon(node, depth, index)}
                     </div>
-                    <span className={`
-                      ${depth === 0 ? 'text-primary font-bold text-lg' : ''}
-                      ${depth === 1 ? 'text-foreground font-semibold' : ''}
-                      ${depth >= 2 ? 'text-muted-foreground' : ''}
-                      transition-colors duration-200
-                    `}>
-                      {node.title}
-                    </span>
-                    {hasChildren(node) && (
-                      <span className="text-xs text-muted-foreground ml-2">
-                        ({node.children!.length} items)
+                    <div className="flex-1">
+                      <span className={`
+                        ${depth === 0 ? 'text-primary font-bold text-lg' : ''}
+                        ${depth === 1 ? 'text-foreground font-semibold' : ''}
+                        ${depth >= 2 ? 'text-muted-foreground' : ''}
+                        transition-colors duration-200
+                      `}>
+                        {node.title}
                       </span>
-                    )}
+                      {hasChildren(node) && (
+                        <span className="text-xs text-muted-foreground ml-2">
+                          ({node.children!.length} items)
+                        </span>
+                      )}
+                      
+                                    {/* Display content directly for multiple sections */}
+              {node.title === "CHAPTER 1 GENERAL GUIDELINES" && (
+                <div className="mt-2 p-3 bg-muted/30 rounded-lg border-l-4 border-primary/50">
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Chapter 1 establishes the fundamental guidelines for police operations, covering uniform requirements, equipment standards, and operational categories. This chapter provides the baseline standards that all police personnel must follow in their daily duties and operations. Compliance with these guidelines ensures professionalism, safety, and effectiveness in all police activities.
+                  </p>
+                </div>
+              )}
+              
+              {node.title === "Section 1-1 Police Uniform and Accessories" && (
+                <div className="mt-2 p-3 bg-muted/30 rounded-lg border-l-4 border-primary/50">
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    1.1 Agency Prescribed Uniform. A police officer shall always wear the prescribed uniform for the kind of police operation to be undertaken (Annex "A").
+                  </p>
+                  <p className="text-sm text-muted-foreground leading-relaxed mt-2">
+                    1.2 Appearing Before the Public. When wearing the police uniform, a police officer shall, at all times, appear to look presentable, respectable, smart, and well-groomed. A police officer shall refrain from doing unnecessary activities and/or actions while on duty.
+                  </p>
+                  <p className="text-sm text-muted-foreground leading-relaxed mt-2">
+                    1.3 Carrying of Basic Police Equipment. Every police officer on patrol, whether on board a vehicle or on foot patrol, shall always carry with him/her his/her issued firearm, and other equipment such as but not limited to restraint device, impact device and personal protective equipment. He/she shall also use other accessories required for the specific police operation being conducted.
+                  </p>
+                </div>
+              )}
+              
+              {node.title === "Section 1-2 Categories of Police Operations" && (
+                <div className="mt-2 p-3 bg-muted/30 rounded-lg border-l-4 border-primary/50">
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Police operations are categorized into distinct types based on their purpose, scope, and required resources. Understanding these categories helps ensure appropriate planning, resource allocation, and execution of law enforcement activities. Each category has specific procedures, requirements, and protocols that must be followed for effective implementation.
+                  </p>
+                </div>
+              )}
+              
+              {node.title === "1.1 Agency Prescribed Uniform" && (
+                        <div className="mt-2 p-3 bg-muted/30 rounded-lg border-l-4 border-primary/50">
+                          <p className="text-sm text-muted-foreground leading-relaxed">
+                            A police officer shall always wear the prescribed uniform for the kind of police operation to be undertaken (Annex "A").
+                          </p>
+                        </div>
+                      )}
+                      
+                      {node.title === "1.2 Appearing Before the Public" && (
+                        <div className="mt-2 p-3 bg-muted/30 rounded-lg border-l-4 border-primary/50">
+                          <p className="text-sm text-muted-foreground leading-relaxed">
+                            When wearing the police uniform, a police officer shall, at all times, appear to look presentable, respectable, smart, and well-groomed. A police officer shall refrain from doing unnecessary activities and/or actions while on duty.
+                          </p>
+                        </div>
+                      )}
+                      
+                      {node.title === "1.3 Carrying of Basic Police Equipment" && (
+                        <div className="mt-2 p-3 bg-muted/30 rounded-lg border-l-4 border-primary/50">
+                          <p className="text-sm text-muted-foreground leading-relaxed">
+                            Every police officer on patrol, whether on board a vehicle or on foot patrol, shall always carry with him/her his/her issued firearm, and other equipment such as but not limited to restraint device, impact device and personal protective equipment. He/she shall also use other accessories required for the specific police operation being conducted.
+                          </p>
+                        </div>
+                      )}
+                      
+                      {node.title === "1.4 Patrol Operations" && (
+                        <div className="mt-2 p-3 bg-muted/30 rounded-lg border-l-4 border-primary/50">
+                          <p className="text-sm text-muted-foreground leading-relaxed">
+                            Patrol operations form the backbone of community policing and crime prevention efforts. These operations involve regular monitoring of assigned areas, responding to calls for service, and maintaining visible police presence. Effective patrol operations require strategic deployment, proper equipment, and continuous communication with command centers.
+                          </p>
+                        </div>
+                      )}
+                      
+                      {node.title === "1.5 Law Enforcement Operations" && (
+                        <div className="mt-2 p-3 bg-muted/30 rounded-lg border-l-4 border-primary/50">
+                          <p className="text-sm text-muted-foreground leading-relaxed">
+                            Law enforcement operations focus on the detection, investigation, and prevention of criminal activities. These operations include arrest procedures, search and seizure activities, and evidence collection. All law enforcement operations must comply with legal requirements and constitutional protections.
+                          </p>
+                        </div>
+                      )}
+                      
+                      {node.title === "1.6 Internal Security Operations" && (
+                        <div className="mt-2 p-3 bg-muted/30 rounded-lg border-l-4 border-primary/50">
+                          <p className="text-sm text-muted-foreground leading-relaxed">
+                            Internal security operations address threats to national security and public order. These operations require coordination with other government agencies and specialized units. Proper protocols must be followed to ensure effective response while protecting civil liberties.
+                          </p>
+                        </div>
+                      )}
+                      
+                      {node.title === "1.7 Public Safety Operations" && (
+                        <div className="mt-2 p-3 bg-muted/30 rounded-lg border-l-4 border-primary/50">
+                          <p className="text-sm text-muted-foreground leading-relaxed">
+                            Public safety operations focus on protecting the public from various hazards and emergencies. These operations include disaster response, crowd control, and emergency management activities. Coordination with emergency services and community organizations is essential for effective response.
+                          </p>
+                        </div>
+                      )}
+                      
+                      {node.title === "1.8 Special Police Operations" && (
+                        <div className="mt-2 p-3 bg-muted/30 rounded-lg border-l-4 border-primary/50">
+                          <p className="text-sm text-muted-foreground leading-relaxed">
+                            Special police operations involve specialized tactics and equipment for unique situations. These operations may include hostage rescue, counter-terrorism, and high-risk interventions. Specialized training and equipment are required for personnel involved in these operations.
+                          </p>
+                        </div>
+                      )}
+                      
+                      {node.title === "1.9 Investigation Operations" && (
+                        <div className="mt-2 p-3 bg-muted/30 rounded-lg border-l-4 border-primary/50">
+                          <p className="text-sm text-muted-foreground leading-relaxed">
+                            Investigation operations focus on gathering evidence and information to solve crimes. These operations require specialized skills in evidence collection, witness interviews, and case management. Proper documentation and chain of custody procedures are essential for successful prosecutions.
+                          </p>
+                        </div>
+                      )}
+                      
+                      {node.title === "1.10 Police Community Relations" && (
+                        <div className="mt-2 p-3 bg-muted/30 rounded-lg border-l-4 border-primary/50">
+                          <p className="text-sm text-muted-foreground leading-relaxed">
+                            Police community relations focus on building trust and cooperation between law enforcement and the community. These activities include community outreach, educational programs, and partnership initiatives. Strong community relations enhance public safety and support for law enforcement efforts.
+                          </p>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </TableCell>
                 <TableCell className="text-center table-cell-elegant">
