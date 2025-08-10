@@ -257,17 +257,17 @@ export const TocTable: React.FC<TocTableProps> = ({ data }) => {
       
       {/* Card-based Layout */}
       <div className="space-y-4">
-        {flattenedData.map(({ node, depth, key, isVisible, href }, index) => (
+            {flattenedData.map(({ node, depth, key, isVisible, href }, index) => (
           <Card 
-            key={key}
-            className={`
+                key={key}
+                className={`
               transition-all duration-300 hover:shadow-lg hover:scale-[1.02]
               ${hasChildren(node) && !["CHAPTER 1 GENERAL GUIDELINES", "1.1 Agency Prescribed Uniform", "1.2 Appearing Before the Public", "1.3 Carrying of Basic Police Equipment", "1.4 Patrol Operations", "1.5 Law Enforcement Operations", "1.6 Internal Security Operations", "1.7 Public Safety Operations", "1.8 Special Police Operations", "1.9 Investigation Operations", "1.10 Police Community Relations", "Section 1-1 Police Uniform and Accessories", "Section 1-2 Categories of Police Operations"].includes(node.title) ? 'cursor-pointer hover:bg-accent/30' : ''}
               ${depth === 0 ? 'border-l-4 border-l-primary bg-gradient-to-r from-primary/5 to-transparent shadow-md' : ''}
               ${depth === 1 ? 'border-l-4 border-l-secondary bg-gradient-to-r from-secondary/5 to-transparent shadow-sm' : ''}
               ${depth >= 2 ? 'border-l-2 border-l-muted bg-gradient-to-r from-muted/5 to-transparent' : ''}
-              ${isVisible ? 'opacity-100' : 'opacity-50'}
-            `}
+                  ${isVisible ? 'opacity-100' : 'opacity-50'}
+                `}
             onClick={!["CHAPTER 1 GENERAL GUIDELINES", "1.1 Agency Prescribed Uniform", "1.2 Appearing Before the Public", "1.3 Carrying of Basic Police Equipment", "1.4 Patrol Operations", "1.5 Law Enforcement Operations", "1.6 Internal Security Operations", "1.7 Public Safety Operations", "1.8 Special Police Operations", "1.9 Investigation Operations", "1.10 Police Community Relations", "Section 1-1 Police Uniform and Accessories", "Section 1-2 Categories of Police Operations"].includes(node.title) ? () => handleRowClick(node, href) : undefined}
           >
             <CardHeader className="pb-3">
@@ -275,8 +275,8 @@ export const TocTable: React.FC<TocTableProps> = ({ data }) => {
                 <div className="flex items-center gap-3 flex-1">
                   {/* Expand/Collapse Icon */}
                   <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 hover:bg-primary/20 transition-colors">
-                    {getExpandIcon(node, depth, index)}
-                  </div>
+                      {getExpandIcon(node, depth, index)}
+                    </div>
                   
                   {/* Title and Icon */}
                   <div className="flex items-center gap-2 flex-1">
@@ -293,41 +293,41 @@ export const TocTable: React.FC<TocTableProps> = ({ data }) => {
                         ${depth === 0 ? 'text-primary font-bold text-xl' : ''}
                         ${depth === 1 ? 'text-foreground font-semibold text-lg' : ''}
                         ${depth >= 2 ? 'text-muted-foreground font-medium' : ''}
-                        transition-colors duration-200
-                      `}>
-                        {node.title}
+                      transition-colors duration-200
+                    `}>
+                      {node.title}
                       </h3>
-                      {hasChildren(node) && (
+                    {hasChildren(node) && (
                         <p className="text-xs text-muted-foreground mt-1">
                           {node.children!.length} {node.children!.length === 1 ? 'item' : 'items'}
                         </p>
-                      )}
-                    </div>
+                    )}
+                  </div>
                   </div>
                 </div>
                 
                 {/* Page Number */}
-                {node.page !== undefined && (
+                  {node.page !== undefined && (
                   <div className="flex items-center gap-2">
                     <span className="inline-flex items-center justify-center px-3 py-1.5 text-xs font-mono bg-primary/10 text-primary rounded-full border border-primary/20 shadow-sm">
                       Page {node.page}
                     </span>
                   </div>
-                )}
+                  )}
                 
                 {/* Expand Button for Parent Nodes */}
-                {hasChildren(node) && (
+                  {hasChildren(node) && (
                   <Button
                     variant="ghost"
                     size="sm"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      toggle(key);
-                    }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        toggle(key);
+                      }}
                     className="ml-2 hover:bg-accent hover:shadow-md transition-all duration-200"
-                    title={isExpanded(node, depth, index) ? "Collapse" : "Expand"}
-                  >
-                    {getChevronIcon(node, depth, index)}
+                      title={isExpanded(node, depth, index) ? "Collapse" : "Expand"}
+                    >
+                      {getChevronIcon(node, depth, index)}
                   </Button>
                 )}
               </div>
