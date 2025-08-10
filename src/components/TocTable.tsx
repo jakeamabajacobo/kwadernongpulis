@@ -16,6 +16,21 @@ const generateHref = (node: TocNode, depth: number, index: number): string => {
     return node.href;
   }
   
+  // COMMENTED OUT: Generate href for chapters 2-4 to prevent navigation
+  // Check if this is a chapter 2, 3, or 4 node
+  if (node.title.includes('CHAPTER 2') || 
+      node.title.includes('CHAPTER 3') || 
+      node.title.includes('CHAPTER 4') ||
+      node.title.includes('Section 2-') ||
+      node.title.includes('Section 3-') ||
+      node.title.includes('Section 4-') ||
+      node.title.includes('2.') ||
+      node.title.includes('3.') ||
+      node.title.includes('4.')) {
+    // Return empty string for chapters 2-4 to disable href links
+    return '';
+  }
+  
   // Generate href based on title - create a more specific key
   const title = node.title.toLowerCase()
     .replace(/[^a-z0-9\s]/g, '')
@@ -221,6 +236,12 @@ export const TocTable: React.FC<TocTableProps> = ({ data }) => {
   };
   
   const handleRowClick = (node: TocNode, href: string) => {
+    // Don't navigate if href is empty (chapters 2-4)
+    if (!href || href === '') {
+      console.log(`Row click on "${node.title}" - href is empty, not navigating.`);
+      return;
+    }
+    
     // Don't navigate for 1.1 Agency Prescribed Uniform since content is displayed directly
     if (node.title === "1.1 Agency Prescribed Uniform") {
       console.log(`Row click on "${node.title}" - content displayed directly, not navigating.`);
@@ -233,8 +254,8 @@ export const TocTable: React.FC<TocTableProps> = ({ data }) => {
       return;
     }
     
-    // Don't navigate for sections 2.1, 2.2, 2.3, 2.4, 2.5, and 2.6 since content is displayed directly
-    if (["2.1 Inter-Office Coordination", "2.2 Coordination by Filing Coordination Form", "2.3 Coordination by Practical/Available Means of Communication", "2.4 Basic Requirements", "2.5 Use of Megaphones and Similar Instruments/devices", "2.6 Accessories"].includes(node.title)) {
+    // Don't navigate for sections 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, and 2.7 since content is displayed directly
+    if (["2.1 Inter-Office Coordination", "2.2 Coordination by Filing Coordination Form", "2.3 Coordination by Practical/Available Means of Communication", "2.4 Basic Requirements", "2.5 Use of Megaphones and Similar Instruments/devices", "2.6 Accessories", "2.7 Use of Body Worn Camera"].includes(node.title)) {
       console.log(`Row click on "${node.title}" - content displayed directly, not navigating.`);
       return;
     }
@@ -288,13 +309,13 @@ export const TocTable: React.FC<TocTableProps> = ({ data }) => {
                 key={key}
                 className={`
               transition-all duration-300 hover:shadow-lg hover:scale-[1.02]
-              ${hasChildren(node) && !["CHAPTER 1 GENERAL GUIDELINES", "1.1 Agency Prescribed Uniform", "1.2 Appearing Before the Public", "1.3 Carrying of Basic Police Equipment", "1.4 Patrol Operations", "1.5 Law Enforcement Operations", "1.6 Internal Security Operations", "1.7 Public Safety Operations", "1.8 Special Police Operations", "1.9 Investigation Operations", "1.10 Police Community Relations", "2.1 Inter-Office Coordination", "2.2 Coordination by Filing Coordination Form", "2.3 Coordination by Practical/Available Means of Communication", "2.4 Basic Requirements", "2.5 Use of Megaphones and Similar Instruments/devices", "2.6 Accessories", "Section 1-1 Police Uniform and Accessories", "Section 1-2 Categories of Police Operations"].includes(node.title) ? 'cursor-pointer hover:bg-accent/30' : ''}
+              ${hasChildren(node) && !["CHAPTER 1 GENERAL GUIDELINES", "1.1 Agency Prescribed Uniform", "1.2 Appearing Before the Public", "1.3 Carrying of Basic Police Equipment", "1.4 Patrol Operations", "1.5 Law Enforcement Operations", "1.6 Internal Security Operations", "1.7 Public Safety Operations", "1.8 Special Police Operations", "1.9 Investigation Operations", "1.10 Police Community Relations", "2.1 Inter-Office Coordination", "2.2 Coordination by Filing Coordination Form", "2.3 Coordination by Practical/Available Means of Communication", "2.4 Basic Requirements", "2.5 Use of Megaphones and Similar Instruments/devices", "2.6 Accessories", "2.7 Use of Body Worn Camera", "Section 1-1 Police Uniform and Accessories", "Section 1-2 Categories of Police Operations"].includes(node.title) && href && href !== '' ? 'cursor-pointer hover:bg-accent/30' : ''}
               ${depth === 0 ? 'border-l-4 border-l-primary bg-gradient-to-r from-primary/5 to-transparent shadow-md' : ''}
               ${depth === 1 ? 'border-l-4 border-l-secondary bg-gradient-to-r from-secondary/5 to-transparent shadow-sm' : ''}
               ${depth >= 2 ? 'border-l-2 border-l-muted bg-gradient-to-r from-muted/5 to-transparent' : ''}
                   ${isVisible ? 'opacity-100' : 'opacity-50'}
                 `}
-            onClick={!["CHAPTER 1 GENERAL GUIDELINES", "1.1 Agency Prescribed Uniform", "1.2 Appearing Before the Public", "1.3 Carrying of Basic Police Equipment", "1.4 Patrol Operations", "1.5 Law Enforcement Operations", "1.6 Internal Security Operations", "1.7 Public Safety Operations", "1.8 Special Police Operations", "1.9 Investigation Operations", "1.10 Police Community Relations", "2.1 Inter-Office Coordination", "2.2 Coordination by Filing Coordination Form", "2.3 Coordination by Practical/Available Means of Communication", "2.4 Basic Requirements", "2.5 Use of Megaphones and Similar Instruments/devices", "2.6 Accessories", "Section 1-1 Police Uniform and Accessories", "Section 1-2 Categories of Police Operations"].includes(node.title) ? () => handleRowClick(node, href) : undefined}
+            onClick={!["CHAPTER 1 GENERAL GUIDELINES", "1.1 Agency Prescribed Uniform", "1.2 Appearing Before the Public", "1.3 Carrying of Basic Police Equipment", "1.4 Patrol Operations", "1.5 Law Enforcement Operations", "1.6 Internal Security Operations", "1.7 Public Safety Operations", "1.8 Special Police Operations", "1.9 Investigation Operations", "1.10 Police Community Relations", "2.1 Inter-Office Coordination", "2.2 Coordination by Filing Coordination Form", "2.3 Coordination by Practical/Available Means of Communication", "2.4 Basic Requirements", "2.5 Use of Megaphones and Similar Instruments/devices", "2.6 Accessories", "2.7 Use of Body Worn Camera", "Section 1-1 Police Uniform and Accessories", "Section 1-2 Categories of Police Operations"].includes(node.title) && href && href !== '' ? () => handleRowClick(node, href) : undefined}
           >
             <CardHeader className="pb-3">
               <div className="flex items-center justify-between">
@@ -618,6 +639,46 @@ export const TocTable: React.FC<TocTableProps> = ({ data }) => {
                   <p className="text-sm text-muted-foreground leading-relaxed">
                     A police officer may carry or use accessories appropriate to the police operation being performed. Accessories may include, ballistic vest, handheld radio, first aid kit, flashlight, hand cuff, whistle and non-lethal equipment Chapter 2 PNPM-DO-D-0-2-13-21 RESTRICTED RESTRICTED 6 including but not limited to baton, truncheon, and night stick to be used in a nonarmed confrontation with a violent, uncooperative and unruly offender.
                   </p>
+                </div>
+              )}
+              
+              {node.title === "2.7 Use of Body Worn Camera" && (
+                <div className="mt-2 p-4 bg-gradient-to-r from-primary/5 to-primary/10 rounded-lg border border-primary/20">
+                  <div className="flex items-center gap-2 mb-2">
+                    <FileTextIcon className="h-4 w-4 text-primary" />
+                    <span className="text-sm font-medium text-primary">Topic Content</span>
+                  </div>
+                  <div className="text-sm text-muted-foreground leading-relaxed space-y-3">
+                    <p>
+                      <strong>a. Chain of Custody over the Recordings in the Execution of Arrest and Search:</strong> The chain of custody over the recordings shall at all times be preserved from improper access, review, and tampering. It shall cover the following events:
+                    </p>
+                    <ol className="list-decimal list-inside ml-4 space-y-1">
+                      <li>Recording of the footage using the BWCs/ARDs;</li>
+                      <li>Turnover of the BWCs/ARDs used by the arresting or searching team, or of the data by the media representative to the Data Custodian to which they belong;</li>
+                      <li>Downloading of the data by the Data Custodian;</li>
+                      <li>Redaction of personal identities by the Data Custodian or his/her representative, whenever applicable;</li>
+                      <li>Retrieval of recording data and their transfer to an external media storage device by the Data Custodian;</li>
+                      <li>Submission and delivery of the recordings contained in an external media storage device to the court.</li>
+                    </ol>
+                    <p>
+                      <strong>b.</strong> The BWC/ARD shall be used/activated during the conduct of arrest, search and whenever practicable, in cases of warrantless arrests. The rules on the use of BWC under A.M. No. 21-06-08-SC shall be observed.
+                    </p>
+                    <p>
+                      <strong>c.</strong> The BWC/ARD shall not be used/activated in the following circumstances:
+                    </p>
+                    <ol className="list-decimal list-inside ml-4 space-y-1">
+                      <li>In police facilities unless in an official capacity, or as part of an investigation procedure;</li>
+                      <li>Conduct of any personal activity (in any location where individuals have a reasonable expectation of privacy, such as restrooms, Chapter 2 PNPM-DO-D-0-2-13-21 RESTRICTED RESTRICTED 7 locker rooms, or break rooms). As a reminder, there is potential criminal and civil liability if this restriction is violated;</li>
+                      <li>Conduct of any personal activity in locations where individuals have reasonable expectation of privacy such as in residences, unless the recording is being made pursuant to a valid arrest or search warrant of the individuals or locations;</li>
+                      <li>During strip or body cavity searches when such is necessary as provided in the warrant;</li>
+                      <li>Conduct of tactical planning before the planned operation;</li>
+                      <li>Intentionally activated to record conversations/communications between PNP personnel without their knowledge during routine, and other non-law enforcement related activities;</li>
+                      <li>Between confidential informants or undercover officers;</li>
+                      <li>Privileged communications between the subject of recordings and other individuals, such as attorneys, members of the clergy, peer support councilors and medical professionals;</li>
+                      <li>While on the grounds of any public, private or parochial elementary or secondary school, hospitals, churches and other places of worship except when responding to an imminent threat to life or health; and</li>
+                      <li>Other circumstances as may be provided by the trial court issuing the warrant which is part of constitutional privilege and where the dignity of an individual may outweigh the public necessity for recording.</li>
+                    </ol>
+                  </div>
                 </div>
               )}
             </CardContent>
