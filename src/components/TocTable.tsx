@@ -233,6 +233,12 @@ export const TocTable: React.FC<TocTableProps> = ({ data }) => {
       return;
     }
     
+    // Don't navigate for sections 2.1, 2.2, and 2.3 since content is displayed directly
+    if (["2.1 Inter-Office Coordination", "2.2 Coordination by Filing Coordination Form", "2.3 Coordination by Practical/Available Means of Communication"].includes(node.title)) {
+      console.log(`Row click on "${node.title}" - content displayed directly, not navigating.`);
+      return;
+    }
+    
     const topicId = href.replace('/topic/', '');
     const hasAssociatedContent = !!contentData[topicId]; // Check if content exists for this node's generated ID
     
@@ -282,13 +288,13 @@ export const TocTable: React.FC<TocTableProps> = ({ data }) => {
                 key={key}
                 className={`
               transition-all duration-300 hover:shadow-lg hover:scale-[1.02]
-              ${hasChildren(node) && !["CHAPTER 1 GENERAL GUIDELINES", "1.1 Agency Prescribed Uniform", "1.2 Appearing Before the Public", "1.3 Carrying of Basic Police Equipment", "1.4 Patrol Operations", "1.5 Law Enforcement Operations", "1.6 Internal Security Operations", "1.7 Public Safety Operations", "1.8 Special Police Operations", "1.9 Investigation Operations", "1.10 Police Community Relations", "Section 1-1 Police Uniform and Accessories", "Section 1-2 Categories of Police Operations"].includes(node.title) ? 'cursor-pointer hover:bg-accent/30' : ''}
+              ${hasChildren(node) && !["CHAPTER 1 GENERAL GUIDELINES", "1.1 Agency Prescribed Uniform", "1.2 Appearing Before the Public", "1.3 Carrying of Basic Police Equipment", "1.4 Patrol Operations", "1.5 Law Enforcement Operations", "1.6 Internal Security Operations", "1.7 Public Safety Operations", "1.8 Special Police Operations", "1.9 Investigation Operations", "1.10 Police Community Relations", "2.1 Inter-Office Coordination", "2.2 Coordination by Filing Coordination Form", "2.3 Coordination by Practical/Available Means of Communication", "Section 1-1 Police Uniform and Accessories", "Section 1-2 Categories of Police Operations"].includes(node.title) ? 'cursor-pointer hover:bg-accent/30' : ''}
               ${depth === 0 ? 'border-l-4 border-l-primary bg-gradient-to-r from-primary/5 to-transparent shadow-md' : ''}
               ${depth === 1 ? 'border-l-4 border-l-secondary bg-gradient-to-r from-secondary/5 to-transparent shadow-sm' : ''}
               ${depth >= 2 ? 'border-l-2 border-l-muted bg-gradient-to-r from-muted/5 to-transparent' : ''}
                   ${isVisible ? 'opacity-100' : 'opacity-50'}
                 `}
-            onClick={!["CHAPTER 1 GENERAL GUIDELINES", "1.1 Agency Prescribed Uniform", "1.2 Appearing Before the Public", "1.3 Carrying of Basic Police Equipment", "1.4 Patrol Operations", "1.5 Law Enforcement Operations", "1.6 Internal Security Operations", "1.7 Public Safety Operations", "1.8 Special Police Operations", "1.9 Investigation Operations", "1.10 Police Community Relations", "Section 1-1 Police Uniform and Accessories", "Section 1-2 Categories of Police Operations"].includes(node.title) ? () => handleRowClick(node, href) : undefined}
+            onClick={!["CHAPTER 1 GENERAL GUIDELINES", "1.1 Agency Prescribed Uniform", "1.2 Appearing Before the Public", "1.3 Carrying of Basic Police Equipment", "1.4 Patrol Operations", "1.5 Law Enforcement Operations", "1.6 Internal Security Operations", "1.7 Public Safety Operations", "1.8 Special Police Operations", "1.9 Investigation Operations", "1.10 Police Community Relations", "2.1 Inter-Office Coordination", "2.2 Coordination by Filing Coordination Form", "2.3 Coordination by Practical/Available Means of Communication", "Section 1-1 Police Uniform and Accessories", "Section 1-2 Categories of Police Operations"].includes(node.title) ? () => handleRowClick(node, href) : undefined}
           >
             <CardHeader className="pb-3">
               <div className="flex items-center justify-between">
@@ -539,6 +545,42 @@ export const TocTable: React.FC<TocTableProps> = ({ data }) => {
                   </div>
                   <p className="text-sm text-muted-foreground leading-relaxed">
                     Police community relations focus on building trust and cooperation between law enforcement and the community. These activities include community outreach, educational programs, and partnership initiatives. Strong community relations enhance public safety and support for law enforcement efforts.
+                  </p>
+                </div>
+              )}
+              
+              {node.title === "2.1 Inter-Office Coordination" && (
+                <div className="mt-2 p-4 bg-gradient-to-r from-primary/5 to-primary/10 rounded-lg border border-primary/20">
+                  <div className="flex items-center gap-2 mb-2">
+                    <FileTextIcon className="h-4 w-4 text-primary" />
+                    <span className="text-sm font-medium text-primary">Topic Content</span>
+                  </div>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    The operations officer or Team Leader/s (TL) of Local Police Units (LPUs) operating outside their territorial jurisdiction and National Support units (NSUs) shall, whenever practicable, coordinate personally at any levels of police offices (Police Regional Office (PRO) to Municipal Police Station (MPS)) or other friendly units within whose jurisdiction the operation is to be conducted.
+                  </p>
+                </div>
+              )}
+              
+              {node.title === "2.2 Coordination by Filing Coordination Form" && (
+                <div className="mt-2 p-4 bg-gradient-to-r from-primary/5 to-primary/10 rounded-lg border border-primary/20">
+                  <div className="flex items-center gap-2 mb-2">
+                    <FileTextIcon className="h-4 w-4 text-primary" />
+                    <span className="text-sm font-medium text-primary">Topic Content</span>
+                  </div>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Prior to the launching of the operation except in cases where the formal (in writing) inter-unit coordination cannot be made due to the nature and/or urgency of the situation such as, but not limited to, cross-jurisdiction pursuit operations, coordination should be made formally using the prescribed Coordination Form, which shall be filed with the Chapter 2 PNPM-DO-D-0-2-13-21 RESTRICTED RESTRICTED 5 concerned operation center of the Police Regional, Provincial or City Police Office and Police Stations (Annex "B").
+                  </p>
+                </div>
+              )}
+              
+              {node.title === "2.3 Coordination by Practical/Available Means of Communication" && (
+                <div className="mt-2 p-4 bg-gradient-to-r from-primary/5 to-primary/10 rounded-lg border border-primary/20">
+                  <div className="flex items-center gap-2 mb-2">
+                    <FileTextIcon className="h-4 w-4 text-primary" />
+                    <span className="text-sm font-medium text-primary">Topic Content</span>
+                  </div>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    In cases where formal inter-unit coordination is not feasible, the Police Unit concerned shall endeavor to notify the Local Police Unit (LPU) through any practical/available means of communication including but not limited to electronic or signal communication at any time before the operation and shall accomplish and furnish the LPU a written incident report immediately after the termination of the operation.
                   </p>
                 </div>
               )}
