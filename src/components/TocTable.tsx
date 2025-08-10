@@ -91,8 +91,8 @@ const flattenTocData = (nodes: TocNode[], depth = 0, expanded: Set<string>): Arr
     // Always show the current node
     result.push({ node, depth, key, isVisible: true, href });
     
-    // Show children only if expanded
-    if (hasChildren && isExpanded) {
+    // Show children if expanded OR if it's Section 2-1 Pre-Operational Clearance
+    if (hasChildren && (isExpanded || node.title === "Section 2-1 Pre-Operational Clearance")) {
       const childResults = flattenTocData(node.children!, depth + 1, expanded);
       result.push(...childResults);
     }
@@ -127,14 +127,36 @@ interface TocTableProps {
 }
 
 export const TocTable: React.FC<TocTableProps> = ({ data }) => {
+  // Initialize with Section 2-1 Pre-Operational Clearance always expanded
   const [expanded, setExpanded] = useState<Set<string>>(new Set());
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
+  
+  // Ensure Section 2-1 Pre-Operational Clearance is always expanded
+  React.useEffect(() => {
+    const findAndExpandSection = (nodes: TocNode[], depth = 0) => {
+      nodes.forEach((node, index) => {
+        if (node.title === "Section 2-1 Pre-Operational Clearance") {
+          const key = `${depth}-${index}-${node.title}`;
+          setExpanded(prev => new Set([...prev, key]));
+        }
+        if (node.children) {
+          findAndExpandSection(node.children, depth + 1);
+        }
+      });
+    };
+    findAndExpandSection(data);
+  }, [data]);
   
   const visible = useMemo(() => filterTree(data, query), [data, query]);
   const flattenedData = useMemo(() => flattenTocData(visible, 0, expanded), [visible, expanded]);
   
   const toggle = (key: string) => {
+    // Don't allow toggling for Section 2-1 Pre-Operational Clearance
+    if (key.includes("Section 2-1 Pre-Operational Clearance")) {
+      return;
+    }
+    
     setExpanded((prev) => {
       const next = new Set(prev);
       if (next.has(key)) next.delete(key);
@@ -144,6 +166,10 @@ export const TocTable: React.FC<TocTableProps> = ({ data }) => {
   };
   
   const isExpanded = (node: TocNode, depth: number, index: number) => {
+    // Always show Section 2-1 Pre-Operational Clearance as expanded
+    if (node.title === "Section 2-1 Pre-Operational Clearance") {
+      return true;
+    }
     const key = `${depth}-${index}-${node.title}`;
     return expanded.has(key);
   };
@@ -174,6 +200,11 @@ export const TocTable: React.FC<TocTableProps> = ({ data }) => {
       return <FileText className="h-4 w-4 text-muted-foreground" />;
     }
     
+    // Always show Section 2-1 Pre-Operational Clearance as expanded
+    if (node.title === "Section 2-1 Pre-Operational Clearance") {
+      return <FolderOpen className="h-4 w-4 text-primary" />;
+    }
+    
     return expanded ? (
       <FolderOpen className="h-4 w-4 text-primary" />
     ) : (
@@ -183,6 +214,12 @@ export const TocTable: React.FC<TocTableProps> = ({ data }) => {
   
   const getChevronIcon = (node: TocNode, depth: number, index: number) => {
     const expanded = isExpanded(node, depth, index);
+    
+    // Always show Section 2-1 Pre-Operational Clearance as expanded
+    if (node.title === "Section 2-1 Pre-Operational Clearance") {
+      return <ChevronDown className="h-4 w-4 text-primary" />;
+    }
+    
     return expanded ? (
       <ChevronDown className="h-4 w-4 text-primary" />
     ) : (
@@ -386,6 +423,20 @@ export const TocTable: React.FC<TocTableProps> = ({ data }) => {
                   <p className="text-sm text-muted-foreground leading-relaxed">
                     Police operations are categorized into distinct types based on their purpose, scope, and required resources. Understanding these categories helps ensure appropriate planning, resource allocation, and execution of law enforcement activities. Each category has specific procedures, requirements, and protocols that must be followed for effective implementation.
                   </p>
+                </div>
+              )}
+              
+              {node.title === "Section 2-1 Pre-Operational Clearance" && (
+                <div className="mt-2 p-4 bg-gradient-to-r from-secondary/5 to-secondary/10 rounded-lg border border-secondary/20">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Layers className="h-4 w-4 text-secondary" />
+                    <span className="text-sm font-medium text-secondary">Section Content</span>
+                  </div>
+                  <div className="p-3 bg-white/50 rounded-lg border-l-4 border-l-primary">
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      In all planned police operations, the team leader of the operating team/s shall secure a Pre-Operation Clearance prior to the conduct of operation. This clearance must be approved by their Chief/Commander/Head of Office/Unit and must be submitted at the Operations Section/Division of the concerned operating police units for record purposes.
+                    </p>
+                  </div>
                 </div>
               )}
               
