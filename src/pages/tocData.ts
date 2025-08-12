@@ -101,14 +101,51 @@ export const tocData: TocNode[] = [
         title: "Section 2-5 Use of Firearm During Police Operations",
         page: 13,
         children: [
-          { title: "2.11 Use of Firearm When Justified", page: 13 },
-          { title: "2.12 Firing at Moving Vehicles is prohibited", page: 13 },
+          { title: "2.11 Use of Firearm When Justified",
+
+             children: [
+                { 
+                  title: "The use of firearm is justified if the offender poses an imminent danger of causing death or injury to the police officer or other persons. The use of firearm is also justified under the doctrines of self-defense, defense of a relative, and defense of a stranger. However, one who resorts to selfdefense must face a real threat on his/her life, and the peril sought to be avoided must be actual, imminent and real. Unlawful aggression should be present for selfdefense to be considered as a justifying circumstance. The police shall not use warning shots during police operation except whenthe police officer is outnumbered and overpowered, and his/her life and limb is in imminent danger.", 
+                }
+             ]
+            
+
+
+           },
+          { title: "2.12 Firing at Moving Vehicles is prohibited", 
+
+            children: [
+              { 
+                title: "A moving vehicle and its occupants shall not be fired upon except when its occupants pose imminent danger of causing death or injury to the police officer or any other person, and that the use of firearm does not create any danger to the public and outweighs the likely benefits of itsnon-use.In firing at a moving vehicle, the following parameters should be considered:a. The intent of the suspect/s to harm the police officer or other persons;b. The capability of the suspect/s to harm with certainty the police officeror other persons; andc. Accessibility or the proximity of the suspect/s from the police officer andother persons."
+              }
+           ]
+
+
+           },
           {
             title:
               "2.13 Filing of an Incident Report After the Use of Firearm",
-            page: 13,
+        
+                   children: [
+              { 
+                title: "A police officer who fires his/her service firearm or weapon during a confrontation with an offender or offenders must submit an incident report outlining the circumstances necessitating the use of his/her firearm."
+              }
+           ]
+
+
           },
-          { title: "2.14 Procedures After an Armed Confrontation", page: 14 },
+          { title: "2.14 Procedures After an Armed Confrontation", 
+
+
+            children: [
+              { 
+                title: "Immediately after an armed confrontation, the officer who is in charge of the operation, when applicable, shall: a. Secure the site of confrontation; b. Check whether the situation still poses imminent danger; c. Take photographs; d. Evacuate all wounded to the nearest hospital regardless of the extent of injury; e. Keep arrested suspects in isolation; f. Conduct debriefing on all involved PNP operatives; g. Submit After-Operations Report; and h. Ensure psychological stress counselling for all involved PNP Operatives."
+              }
+           ]
+
+
+
+           },
         ],
       },
     ],

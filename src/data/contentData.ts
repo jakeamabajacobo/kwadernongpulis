@@ -578,7 +578,7 @@ export const contentData: Record<string, ContentData> = {
   },
   "2-11-use-of-firearm-when-justified": {
     id: "2-11-use-of-firearm-when-justified",
-    title: "2.11 Use of Firearm When Justified",
+    title: "2.11Use of Firearm When Justified ",
     chapter: "2.11",
     content: [
       "2.11 Use of Firearm When Justified",
