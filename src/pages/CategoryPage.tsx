@@ -154,7 +154,6 @@ const policeContent: Record<string, any> = {
       "g. Submit After-Operations Report; and",
       "h. Ensure psychological stress counselling for all involved PNP Operatives."
     ]
-<<<<<<< HEAD
   },
   
   // CHAPTER 3 POLICE OPERATIONS
@@ -349,8 +348,6 @@ const policeContent: Record<string, any> = {
       "4) Search/Arresting personnel – shall search, seize illegal items and arrest offenders;",
       "5) Forward/Rear Security– shall provide security in the checkpoint area and block/pursue fleeing suspects/vehicle;"
     ]
-=======
->>>>>>> parent of 28d7441 (Add chapter 3 data)
   }
 };
 
