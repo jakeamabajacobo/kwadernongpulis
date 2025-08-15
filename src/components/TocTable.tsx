@@ -991,6 +991,30 @@ export const TocTable: React.FC<TocTableProps> = ({ data }) => {
                   </div>
                 </div>
               )}
+
+
+{node.title === "a. Patrol Supervisors" && (
+                <div className="mt-2 p-4 bg-gradient-to-r from-primary/5 to-primary/10 rounded-lg border border-primary/20">
+                  <div className="flex items-center gap-2 mb-2">
+                    <FileTextIcon className="h-4 w-4 text-primary" />
+                    <span className="text-sm font-medium text-primary">Make a patrol plan with the following details:</span>
+                  </div>
+                  <div className="text-sm text-muted-foreground leading-relaxed space-y-3">
+                   
+                    <ol className="list-decimal list-inside ml-4 space-y-2">
+                      <li> Area Coverage: safe haven, ambush areas and crimeprone areas;  </li>
+                      <li> Organizational detail of personnel;</li>
+                      <li>Duration;</li>
+                      <li> Stand-by points; and</li>
+                      <li> Route plan.</li>
+             
+                    </ol>
+                  </div>
+                </div>
+              )}
+
+
+
               
               {node.title === "2.13 Filing of an Incident Report After the Use of Firearm" && (
                 <div className="mt-2 p-4 bg-gradient-to-r from-primary/5 to-primary/10 rounded-lg border border-primary/20">
