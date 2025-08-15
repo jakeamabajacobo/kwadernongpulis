@@ -278,10 +278,10 @@ export const TocTable: React.FC<TocTableProps> = ({ data }) => {
       return;
     }
     
-    // Allow navigation to Section 2-5 topics (2.11, 2.12, 2.13, 2.14) since we have content for them
+    // Don't navigate for Section 2-5 topics (2.11, 2.12, 2.13, 2.14) since content is displayed directly
     if (["2.11 Use of Firearm When Justified", "2.12 Firing at Moving Vehicles is prohibited", "2.13 Filing of an Incident Report After the Use of Firearm", "2.14 Procedures After an Armed Confrontation"].includes(node.title)) {
-      console.log(`Row click on "${node.title}" - navigating to Section 2-5 topic.`);
-      // Continue with navigation
+      console.log(`Row click on "${node.title}" - content displayed directly, not navigating.`);
+      return;
     }
     
     const topicId = href.replace('/topic/', '');
@@ -955,6 +955,77 @@ export const TocTable: React.FC<TocTableProps> = ({ data }) => {
                     <p>
                       <strong>Accountability:</strong> The officer in charge is ultimately accountable for the success or failure of the operation and must ensure that all actions are conducted within the bounds of law and policy.
                     </p>
+                  </div>
+                </div>
+              )}
+              
+              {node.title === "2.11 Use of Firearm When Justified" && (
+                <div className="mt-2 p-4 bg-gradient-to-r from-primary/5 to-primary/10 rounded-lg border border-primary/20">
+                  <div className="flex items-center gap-2 mb-2">
+                    <FileTextIcon className="h-4 w-4 text-primary" />
+                    <span className="text-sm font-medium text-primary">Topic Content</span>
+                  </div>
+                  <div className="text-sm text-muted-foreground leading-relaxed space-y-3">
+                    <p>
+                      <strong>2.11 Use of Firearm When Justified:</strong> The use of firearm is justified if the offender poses an imminent danger of causing death or injury to the police officer or other persons. The use of firearm is also justified under the doctrines of self-defense, defense of a relative, and defense of a stranger. However, one who resorts to self-defense must face a real threat on his/her life, and the peril sought to be avoided must be actual, imminent and real. Unlawful aggression should be present for self-defense to be considered as a justifying circumstance. The police shall not use warning shots during police operation except when the police officer is outnumbered and overpowered, and his/her life and limb is in imminent danger.
+                    </p>
+                  </div>
+                </div>
+              )}
+              
+              {node.title === "2.12 Firing at Moving Vehicles is prohibited" && (
+                <div className="mt-2 p-4 bg-gradient-to-r from-primary/5 to-primary/10 rounded-lg border border-primary/20">
+                  <div className="flex items-center gap-2 mb-2">
+                    <FileTextIcon className="h-4 w-4 text-primary" />
+                    <span className="text-sm font-medium text-primary">Topic Content</span>
+                  </div>
+                  <div className="text-sm text-muted-foreground leading-relaxed space-y-3">
+                    <p>
+                      <strong>2.12 Firing at Moving Vehicles is prohibited:</strong> A moving vehicle and its occupants shall not be fired upon except when its occupants pose imminent danger of causing death or injury to the police officer or any other person, and that the use of firearm does not create any danger to the public and outweighs the likely benefits of its non-use. In firing at a moving vehicle, the following parameters should be considered:
+                    </p>
+                    <ol className="list-decimal list-inside ml-4 space-y-2">
+                      <li><strong>a.</strong> The intent of the suspect/s to harm the police officer or other persons</li>
+                      <li><strong>b.</strong> The capability of the suspect/s to harm with certainty the police officer or other persons</li>
+                      <li><strong>c.</strong> Accessibility or the proximity of the suspect/s from the police officer and other persons</li>
+                    </ol>
+                  </div>
+                </div>
+              )}
+              
+              {node.title === "2.13 Filing of an Incident Report After the Use of Firearm" && (
+                <div className="mt-2 p-4 bg-gradient-to-r from-primary/5 to-primary/10 rounded-lg border border-primary/20">
+                  <div className="flex items-center gap-2 mb-2">
+                    <FileTextIcon className="h-4 w-4 text-primary" />
+                    <span className="text-sm font-medium text-primary">Topic Content</span>
+                  </div>
+                  <div className="text-sm text-muted-foreground leading-relaxed space-y-3">
+                    <p>
+                      <strong>2.13 Filing of an Incident Report After the Use of Firearm:</strong> A police officer who fires his/her service firearm or weapon during a confrontation with an offender or offenders must submit an incident report outlining the circumstances necessitating the use of his/her firearm.
+                    </p>
+                  </div>
+                </div>
+              )}
+              
+              {node.title === "2.14 Procedures After an Armed Confrontation" && (
+                <div className="mt-2 p-4 bg-gradient-to-r from-primary/5 to-primary/10 rounded-lg border border-primary/20">
+                  <div className="flex items-center gap-2 mb-2">
+                    <FileTextIcon className="h-4 w-4 text-primary" />
+                    <span className="text-sm font-medium text-primary">Topic Content</span>
+                  </div>
+                  <div className="text-sm text-muted-foreground leading-relaxed space-y-3">
+                    <p>
+                      <strong>2.14 Procedures After an Armed Confrontation:</strong> Immediately after an armed confrontation, the officer who is in charge of the operation, when applicable, shall:
+                    </p>
+                    <ol className="list-decimal list-inside ml-4 space-y-2">
+                      <li><strong>a.</strong> Secure the site of confrontation</li>
+                      <li><strong>b.</strong> Check whether the situation still poses imminent danger</li>
+                      <li><strong>c.</strong> Take photographs</li>
+                      <li><strong>d.</strong> Evacuate all wounded to the nearest hospital regardless of the extent of injury</li>
+                      <li><strong>e.</strong> Keep arrested suspects in isolation</li>
+                      <li><strong>f.</strong> Conduct debriefing on all involved PNP operatives</li>
+                      <li><strong>g.</strong> Submit After-Operations Report</li>
+                      <li><strong>h.</strong> Ensure psychological stress counselling for all involved PNP Operatives</li>
+                    </ol>
                   </div>
                 </div>
               )}
