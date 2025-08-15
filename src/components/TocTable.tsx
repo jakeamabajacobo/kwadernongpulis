@@ -1029,6 +1029,58 @@ export const TocTable: React.FC<TocTableProps> = ({ data }) => {
                   </div>
                 </div>
               )}
+
+
+
+
+
+{node.title === "1.1 Patrol Guidelines" && (
+                <div className="mt-2 p-4 bg-gradient-to-r from-primary/5 to-primary/10 rounded-lg border border-primary/20">
+                  <div className="flex items-center gap-2 mb-2">
+                    <FileTextIcon className="h-4 w-4 text-primary" />
+                    <span className="text-sm font-medium text-primary">Topic Content</span>
+                  </div>
+                  <div className="text-sm text-muted-foreground leading-relaxed space-y-3">
+                
+                    <ol className="list-decimal list-inside ml-4 space-y-2">
+                      <li> Conduct briefing before and debriefing after patrol operations</li>
+                      <li>Perform firearm and equipment check prior to dispatch. </li>
+                      <li>Observe precautionary measures and personal safety while on patrol;</li>
+                      <li> Plan out patrol routes based on prevailing crime trends and patterns; </li>
+                      <li> Observe defensive driving and follow traffic rules and regulations;</li>
+                      <li>Establish good rapport with people on your beat and be familiar with all
+                      the people in the community;</li>
+                      <li>Patrol members must be always on the look-out for indications of vices
+                      and other illegal activities on their beat;</li>
+                      <li>Patrol members must be knowledgeable of all conditions, events and
+details of places on their beat;</li>
+                      <li>Be observant of people, places, situations or conditions and develop
+an inquisitive attitude especially if the subject appears to be slightly out
+of the ordinary;
+</li>
+<li>Keep under close observation actions of juveniles, troublemakers /
+agitators and the mentally ill/retarded persons and report information
+to the concerned agency for appropriate action;</li>
+<li>When requiring proof of identification from any person, let him/her
+hand it over to you;</li>
+<li>Patrol members must inform tactical operations center before
+responding to any incident.</li>
+
+                    </ol>
+                  </div>
+                </div>
+              )}
+
+
+
+
+
+
+
+
+
+
+
             </CardContent>
           </Card>
         ))}
